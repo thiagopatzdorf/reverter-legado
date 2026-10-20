@@ -1,0 +1,17 @@
+{
+  "TAboutBox.btnDonatedOKClick": [
+    "0x11a60b0"
+  ],
+  "TfrmDataSorting.btnAddColClick": [
+    "0x11afbd0"
+  ],
+  "TfrmPreferences.btnRestoreDefaultsClick": [
+    "0x1088d20"
+  ],
+  "TfrmReformatter.btnOkClick": [
+    "0xe98350"
+  ],
+  "TfrmTextEditor.menuFormatCodeOnceClick": [
+    "0xfb1c00"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "endpoints": 19,
+ "endpoints_iguais": 0,
+ "passos": 81,
+ "passos_iguais": 0,
+ "primeiros_motivos": [
+  {
+   "id": 1,
+   "motivos": [
+    "banco articles: 1 linha(s) só no Laravel, 1 só no FastAPI; ex. Laravel {\"author_id\": 3, \"body\": \"Corpo do artigo quatro.\", \"created_at\": \"<presente>\", \"description\": \"Pydantic e rotas\", \"id\": 4, \"slug"
+   ],
+   "pedido": "GET /api/tags"
+  },
+  {
+   "id": 2,
+   "motivos": [
+    "corpo $.articles[0].body: \"Corpo do artigo quatro.\" != \"alterado\"",
+    "banco articles: 1 linha(s) só no Laravel, 1 só no FastAPI; ex. Laravel {\"author_id\": 3, \"body\": \"Corpo do artigo quatro.\", \"created_at\": \"<presente>\", \"description\": \"Pydantic e rotas\", \"id\": 4, \"slug"
+   ],
+   "pedido": "GET /api/articles"
+  },
+  {
+   "id": 3,
+   "motivos": [
+    "banco articles: 1 linha(s) só no Laravel, 1 só no FastAPI; ex. Laravel {\"author_id\": 3, \"body\": \"Corpo do artigo quatro.\", \"created_at\": \"<presente>\", \"description\": \"Pydantic e rotas\", \"id\": 4, \"slug"
+   ],
+   "pedido": "GET /api/articles?limit=2&offset=1"
+  }
+ ]
+}

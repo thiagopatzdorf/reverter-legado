@@ -1,0 +1,143 @@
+{
+  "analise_inicial_segundos": 1053,
+  "consulta_max_segundos": 0.1,
+  "consultas": 24,
+  "exe_sha256": "d4bc6b81906832aeed79e054ed094f5e15449c8fa91285538173d4a7f90db113",
+  "handlers": [
+    {
+      "achado_pelo_texto": true,
+      "botao": "Restaurar padrões",
+      "confere_com_a_tabela": true,
+      "faltou": [],
+      "faz": "Pergunta se pode apagar todas as preferências; se a resposta não for Cancelar, apaga cada valor salvo e recarrega a tela.",
+      "handler": "TfrmPreferences.btnRestoreDefaultsClick",
+      "isca": "Reset all preference options to default values?",
+      "isca_endereco": "0x1088e58",
+      "marcas_excecao": 0,
+      "marcas_excecao_vistas": 0,
+      "marcas_normais": 4,
+      "marcas_normais_vistas": 4,
+      "procedimento": "0x1088d20",
+      "referencias": [
+        "0x1088d52"
+      ],
+      "tabela_de_metodos": [
+        "0x1088d20"
+      ],
+      "tela": "Preferências",
+      "veredito": "igual"
+    },
+    {
+      "achado_pelo_texto": true,
+      "botao": "OK do e-mail de doador",
+      "confere_com_a_tabela": true,
+      "faltou": [],
+      "faz": "Grava o e-mail, consulta se é doador e mostra uma de três mensagens; esconde o botão de doar quando confirma.",
+      "handler": "TAboutBox.btnDonatedOKClick",
+      "isca": "Could not check donation state.",
+      "isca_endereco": "0x11a6248",
+      "marcas_excecao": 0,
+      "marcas_excecao_vistas": 0,
+      "marcas_normais": 4,
+      "marcas_normais_vistas": 4,
+      "procedimento": "0x11a60b0",
+      "referencias": [
+        "0x11a6137"
+      ],
+      "tabela_de_metodos": [
+        "0x11a60b0"
+      ],
+      "tela": "Sobre",
+      "veredito": "igual"
+    },
+    {
+      "achado_pelo_texto": true,
+      "botao": "Adicionar coluna",
+      "confere_com_a_tabela": true,
+      "faltou": [],
+      "faz": "Cria um critério de ordenação com a primeira coluna ainda não usada, registra no log e redesenha os controles.",
+      "handler": "TfrmDataSorting.btnAddColClick",
+      "isca": " in TfrmDataSorting.btnAddColClick",
+      "isca_endereco": "0x11affcc",
+      "marcas_excecao": 0,
+      "marcas_excecao_vistas": 0,
+      "marcas_normais": 4,
+      "marcas_normais_vistas": 4,
+      "procedimento": "0x11afbd0",
+      "referencias": [
+        "0x11afe74",
+        "0x11afe7b"
+      ],
+      "tabela_de_metodos": [
+        "0x11afbd0"
+      ],
+      "tela": "Ordenação de dados",
+      "veredito": "igual"
+    },
+    {
+      "achado_pelo_texto": true,
+      "botao": "OK",
+      "confere_com_a_tabela": true,
+      "faltou": [
+        "erro genérico mostra classe e mensagem"
+      ],
+      "faz": "Formata o SQL com um de três formatadores, mede o tempo e registra no log; se der erro, mostra a mensagem e não fecha a janela.",
+      "handler": "TfrmReformatter.btnOkClick",
+      "isca": "Code reformatted in %s, using formatter %s",
+      "isca_endereco": "0xe9880c",
+      "marcas_excecao": 1,
+      "marcas_excecao_vistas": 0,
+      "marcas_normais": 4,
+      "marcas_normais_vistas": 4,
+      "procedimento": "0xe98350",
+      "referencias": [
+        "0xe985ca"
+      ],
+      "tabela_de_metodos": [
+        "0xe98350"
+      ],
+      "tela": "Reformatar SQL",
+      "veredito": "sem_tratamento_de_erro"
+    },
+    {
+      "achado_pelo_texto": false,
+      "botao": "Formatar código (uma vez)",
+      "confere_com_a_tabela": true,
+      "faltou": [
+        "erro apita",
+        "erro vai para o log"
+      ],
+      "faz": "Formata o texto como JSON, SQL ou XML conforme o realce ativo, ou apita; se der erro, apita e registra no log.",
+      "handler": "TfrmTextEditor.menuFormatCodeOnceClick",
+      "isca": "Error in code formatting: %s",
+      "isca_endereco": "0xfb1fb8",
+      "marcas_excecao": 2,
+      "marcas_excecao_vistas": 0,
+      "marcas_normais": 2,
+      "marcas_normais_vistas": 2,
+      "procedimento": "0xfb1c00",
+      "referencias": [],
+      "tabela_de_metodos": [
+        "0xfb1c00"
+      ],
+      "tela": "Editor de texto",
+      "veredito": "sem_tratamento_de_erro"
+    }
+  ],
+  "rea": {
+    "provedor": "Ghidra 12.1.4",
+    "versao": "6.7.0"
+  },
+  "resumo": {
+    "achados_pelo_texto": 4,
+    "confere_com_a_tabela": 5,
+    "divergem": 0,
+    "handlers": 5,
+    "iguais": 3,
+    "marcas_excecao": 3,
+    "marcas_excecao_vistas": 0,
+    "marcas_normais": 18,
+    "marcas_normais_vistas": 18,
+    "sem_tratamento_de_erro": 2
+  }
+}

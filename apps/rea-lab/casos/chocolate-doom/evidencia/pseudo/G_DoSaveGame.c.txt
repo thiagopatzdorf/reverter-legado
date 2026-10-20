@@ -1,0 +1,76 @@
+
+void FUN_14002d590(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  long lVar1;
+  LPCSTR pCVar2;
+  LPCSTR pCVar3;
+  char *pcVar4;
+  LPCSTR pCVar5;
+  char *pcVar6;
+  undefined *puVar7;
+  longlong lVar8;
+  undefined8 uVar9;
+  
+  pCVar2 = (LPCSTR)FUN_14003c810();
+  pCVar3 = FUN_14003c850(DAT_140149c20);
+  puVar7 = &DAT_1400a93d0;
+  DAT_14014c440 = FUN_140003c10(pCVar2,"wb");
+  if (DAT_14014c440 == (FILE *)0x0) {
+    pCVar5 = (LPCSTR)FUN_140004990("recovery.dsg",puVar7,param_3,param_4);
+    DAT_14014c440 = FUN_140003c10(pCVar5,"wb");
+    if (DAT_14014c440 == (FILE *)0x0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140002a20("Failed to open either \'%s\' or \'%s\' to write savegame.",pCVar2,pCVar5,
+                    param_4);
+    }
+    DAT_14014c434 = 0;
+    FUN_14003c8f0(&DAT_140149c00);
+    FUN_14003cc30();
+    FUN_14003dda0();
+    FUN_14003e210();
+    FUN_14003f2b0();
+    FUN_14003cbb0();
+    puVar7 = (undefined *)(ulonglong)DAT_140064e24;
+    if (DAT_140064e24 != 0) {
+      lVar1 = ftell(DAT_14014c440);
+      if (0x2c000 < lVar1) goto LAB_14002d6a3;
+    }
+    fclose(DAT_14014c440);
+    if (pCVar5 != (LPCSTR)0x0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140002a20("Failed to open savegame file \'%s\' for writing.\nBut your game has been saved to \'%s\' for recovery."
+                    ,pCVar2,pCVar5,param_4);
+    }
+  }
+  else {
+    DAT_14014c434 = 0;
+    FUN_14003c8f0(&DAT_140149c00);
+    FUN_14003cc30();
+    FUN_14003dda0();
+    FUN_14003e210();
+    FUN_14003f2b0();
+    FUN_14003cbb0();
+    if (DAT_140064e24 != 0) {
+      lVar1 = ftell(DAT_14014c440);
+      if (0x2c000 < lVar1) {
+LAB_14002d6a3:
+                    /* WARNING: Subroutine does not return */
+        FUN_140002a20("Savegame buffer overrun",puVar7,param_3,param_4);
+      }
+    }
+    fclose(DAT_14014c440);
+  }
+  FUN_140003c80(pCVar3);
+  FUN_140003cc0(pCVar2,pCVar3);
+  uVar9 = 0x20;
+  DAT_140149b70 = 0;
+  FUN_140004720(&DAT_140149c00,"",0x20);
+  lVar8 = (longlong)DAT_1401495e4;
+  pcVar6 = "game saved.";
+  pcVar4 = FUN_140007b60("game saved.");
+  (&DAT_1401496e8)[lVar8 * 0x29] = pcVar4;
+  FUN_140046e80(pcVar6,pcVar4,uVar9,param_4);
+  return;
+}
+

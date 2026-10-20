@@ -1,0 +1,85 @@
+void FUN_00e98350(longlong param_1)
+
+{
+  int iVar1;
+  char cVar2;
+  ULONGLONG UVar3;
+  undefined1 auStack_e8 [48];
+  undefined8 local_b8;
+  undefined8 local_b0;
+  undefined8 local_a8;
+  undefined8 local_a0;
+  undefined8 local_98;
+  undefined1 local_90;
+  undefined8 local_88;
+  undefined1 local_80;
+  undefined8 local_78;
+  undefined8 local_70;
+  undefined8 local_68;
+  undefined8 local_60;
+  undefined8 local_58;
+  undefined1 *local_50;
+  undefined4 *local_40;
+  double local_38;
+  ULONGLONG local_30;
+  undefined8 local_18;
+  undefined8 local_10;
+  
+  local_50 = auStack_e8;
+  local_b0 = 0;
+  local_b8 = 0;
+  local_a8 = 0;
+  local_78 = 0;
+  local_a0 = 0;
+  local_70 = 0;
+  local_68 = 0;
+  local_60 = 0;
+  local_58 = 0;
+  local_18 = 0;
+  local_10 = 0;
+  FUN_0087a960(*(undefined8 *)PTR_DAT_01408ec8,0xfff5);
+  local_30 = GetTickCount64();
+  iVar1 = *(int *)(*(longlong *)(param_1 + 0x748) + 0x4f8);
+  if (iVar1 == 0) {
+    FUN_00e98d80(param_1,&local_58,*(undefined8 *)(param_1 + 0x770));
+    FUN_004129b0(param_1 + 0x778,local_58);
+  }
+  else if (iVar1 == 1) {
+    FUN_00e99a60(param_1,&local_60,*(undefined8 *)(param_1 + 0x770));
+    FUN_004129b0(param_1 + 0x778,local_60);
+  }
+  else if (iVar1 == 2) {
+    FUN_00e99d10(param_1,&local_68,*(undefined8 *)(param_1 + 0x770));
+    FUN_004129b0(param_1 + 0x778,local_68);
+  }
+  FUN_00d3dec0(&local_70,*(undefined8 *)(param_1 + 0x778));
+  FUN_004129b0(param_1 + 0x778,local_70);
+  UVar3 = GetTickCount64();
+  local_38 = (double)(longlong)(UVar3 - local_30);
+  if ((longlong)(UVar3 - local_30) < 0) {
+    local_38 = local_38 + 1.8446744073709552e+19;
+  }
+  local_18 = 0;
+  local_10 = 0;
+  FUN_00d3f530(&local_10,local_38 / 1000.0,1,3);
+  local_40 = (undefined4 *)(*(longlong *)(param_1 + 0x748) + 0x4f8);
+  FUN_0047a080(&local_18,*local_40);
+  local_98 = local_10;
+  local_90 = 0x11;
+  FUN_004144f0(&local_a0,&DAT_00e98870,local_18);
+  local_88 = local_a0;
+  local_80 = 0x11;
+  FUN_00d46670(&local_78,L"Code reformatted in %s, using formatter %s",&local_98,1);
+  FUN_0123a200(*(undefined8 *)PTR_DAT_01406048,local_78,0,0);
+  FUN_00412320(&local_10);
+  FUN_00412320(&local_18);
+  cVar2 = (**(code **)(**(longlong **)(param_1 + 0x768) + 0x2d8))(*(longlong **)(param_1 + 0x768));
+  if (cVar2 == '\0') {
+    FUN_00d55000(*(undefined8 *)PTR_DAT_014061d8,0x131,
+                 *(int *)(*(longlong *)(param_1 + 0x748) + 0x4f8) + 1,0);
+  }
+  FUN_0087a960(*(undefined8 *)PTR_DAT_01408ec8,0);
+  FUN_00412400(&local_b8,4);
+  FUN_00412400(&local_78,5);
+  return;
+}

@@ -1,0 +1,17 @@
+{
+ "fonte_funcoes_static": 878,
+ "fonte_funcoes_teto": 2101,
+ "fonte_literais_achados_no_binario": 2182,
+ "fonte_literais_cobertura": 0.8983,
+ "fonte_literais_unicos_min6": 2429,
+ "razao_funcoes_rea_sobre_fonte": 0.7144,
+ "rea_nomes_que_batem_com_o_fonte": 0,
+ "rea_nomes_que_batem_exemplos": [],
+ "rea_procedimentos_com_nome": 3,
+ "rea_procedimentos_externos": 315,
+ "rea_procedimentos_internos": 1730,
+ "rea_procedimentos_proprios": 1501,
+ "rea_procedimentos_thunk": 229,
+ "rea_procedimentos_total": 2045,
+ "rea_textos_total": 3707
+}

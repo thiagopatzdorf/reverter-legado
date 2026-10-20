@@ -1,0 +1,71 @@
+{
+  "_leia": "Fatos do fonte (HeidiSQL effb854) de cada handler e o texto que cada um deixa no pseudo-código do REA. 'tipo: normal' tem de aparecer; 'tipo: excecao' é código de bloco except. O veredito sai de casos/heidisql_rea.py, não é digitado.",
+  "handlers": [
+    {
+      "handler": "TfrmPreferences.btnRestoreDefaultsClick",
+      "tela": "Preferências",
+      "botao": "Restaurar padrões",
+      "faz": "Pergunta se pode apagar todas as preferências; se a resposta não for Cancelar, apaga cada valor salvo e recarrega a tela.",
+      "isca": "Reset all preference options to default values?",
+      "marcas": [
+        {"fato": "pergunta de confirmação", "fonte": "MessageDialog(_('Reset all preference options to default values?'), ...", "pseudo": "L\"Reset all preference options to default values?\"", "tipo": "normal"},
+        {"fato": "texto de apoio da pergunta", "fonte": "_('This also applies to automatic settings, e.g. toolbar positions.')", "pseudo": "L\"This also applies to automatic settings, e.g. toolbar positions.\"", "tipo": "normal"},
+        {"fato": "sai se a resposta for Cancelar", "fonte": "= mrCancel then Exit;", "pseudo": "if (iVar1 != 2)", "tipo": "normal"},
+        {"fato": "apaga cada valor num laço", "fonte": "for i:=0 to ValueList.Count-1 do AppSettings.DeleteValue(ValueList[i]);", "pseudo": "do {", "tipo": "normal"}
+      ]
+    },
+    {
+      "handler": "TAboutBox.btnDonatedOKClick",
+      "tela": "Sobre",
+      "botao": "OK do e-mail de doador",
+      "faz": "Grava o e-mail, consulta se é doador e mostra uma de três mensagens; esconde o botão de doar quando confirma.",
+      "isca": "Could not check donation state.",
+      "marcas": [
+        {"fato": "estado desconhecido", "fonte": "nbUnset: MessageDialog(_('Could not check donation state.'), ...", "pseudo": "L\"Could not check donation state.\"", "tipo": "normal"},
+        {"fato": "e-mail inválido", "fonte": "nbFalse: ErrorDialog(_('Not a valid donor email address'));", "pseudo": "L\"Not a valid donor email address\"", "tipo": "normal"},
+        {"fato": "doação confirmada", "fonte": "nbTrue: MessageDialog(_('Thanks for donating!'), ...", "pseudo": "L\"Thanks for donating!\"", "tipo": "normal"},
+        {"fato": "botão de doar some quando confirma", "fonte": "btnDonate.Visible := Check <> nbTrue;", "pseudo": "cVar1 != '\\x02'", "tipo": "normal"}
+      ]
+    },
+    {
+      "handler": "TfrmDataSorting.btnAddColClick",
+      "tela": "Ordenação de dados",
+      "botao": "Adicionar coluna",
+      "faz": "Cria um critério de ordenação com a primeira coluna ainda não usada, registra no log e redesenha os controles.",
+      "isca": " in TfrmDataSorting.btnAddColClick",
+      "marcas": [
+        {"fato": "percorre os critérios já existentes", "fonte": "for SortItem in FSortItems do begin", "pseudo": "while( true )", "tipo": "normal"},
+        {"fato": "sem coluna livre, usa a primeira", "fonte": "if UnusedColumns.Count > 0 then ... else NewSortItem.Column := FColumnNames[0];", "pseudo": "if (iVar2 < 1)", "tipo": "normal"},
+        {"fato": "mensagem de log", "fonte": "MainForm.LogSQL('Created sorting for column '+...", "pseudo": "L\"Created sorting for column \"", "tipo": "normal"},
+        {"fato": "fim da mensagem de log", "fonte": "... +' in TfrmDataSorting.btnAddColClick', lcDebug);", "pseudo": "L\" in TfrmDataSorting.btnAddColClick\"", "tipo": "normal"}
+      ]
+    },
+    {
+      "handler": "TfrmReformatter.btnOkClick",
+      "tela": "Reformatar SQL",
+      "botao": "OK",
+      "faz": "Formata o SQL com um de três formatadores, mede o tempo e registra no log; se der erro, mostra a mensagem e não fecha a janela.",
+      "isca": "Code reformatted in %s, using formatter %s",
+      "marcas": [
+        {"fato": "cursor de espera", "fonte": "Screen.Cursor := crHourGlass;", "pseudo": "0xfff5", "tipo": "normal"},
+        {"fato": "mede o tempo", "fonte": "StartTime := GetTickCount64;", "pseudo": "GetTickCount64()", "tipo": "normal"},
+        {"fato": "escolhe entre três formatadores", "fonte": "case grpReformatter.ItemIndex of 0: ... 1: ... 2: ...", "pseudo": "else if (iVar1 == 2)", "tipo": "normal"},
+        {"fato": "mensagem de log", "fonte": "f_('Code reformatted in %s, using formatter %s', ...)", "pseudo": "L\"Code reformatted in %s, using formatter %s\"", "tipo": "normal"},
+        {"fato": "erro genérico mostra classe e mensagem", "fonte": "on E:Exception do begin ErrorDialog(E.ClassName + ': ' + E.Message);", "pseudo": "L\": \"", "tipo": "excecao"}
+      ]
+    },
+    {
+      "handler": "TfrmTextEditor.menuFormatCodeOnceClick",
+      "tela": "Editor de texto",
+      "botao": "Formatar código (uma vez)",
+      "faz": "Formata o texto como JSON, SQL ou XML conforme o realce ativo, ou apita; se der erro, apita e registra no log.",
+      "isca": "Error in code formatting: %s",
+      "marcas": [
+        {"fato": "tipo desconhecido apita", "fonte": "MessageBeep(MB_ICONEXCLAMATION);", "pseudo": "MessageBeep(0x30)", "tipo": "normal"},
+        {"fato": "SQL usa o formatador interno", "fonte": "frmReformatter.FormatSqlInternal(MemoText.Text)", "pseudo": "FUN_00e98d80", "tipo": "normal"},
+        {"fato": "erro apita", "fonte": "on E:Exception do begin MessageBeep(MB_ICONERROR);", "pseudo": "MessageBeep(0x10)", "tipo": "excecao"},
+        {"fato": "erro vai para o log", "fonte": "MainForm.LogSQL(f_('Error in code formatting: %s', [E.Message]));", "pseudo": "L\"Error in code formatting: %s\"", "tipo": "excecao"}
+      ]
+    }
+  ]
+}

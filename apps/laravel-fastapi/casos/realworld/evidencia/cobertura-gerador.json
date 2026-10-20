@@ -1,0 +1,111 @@
+{
+ "avisos_config": 17,
+ "cobertas": 19,
+ "por_rota": [
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/user"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "PUT /api/user"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/users/login"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/users"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/profiles/{username}/follow"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "DELETE /api/profiles/{username}/follow"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/profiles/{username}"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/articles/feed"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/articles"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "PUT /api/articles/{slug}"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "DELETE /api/articles/{slug}"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/articles"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/articles/{slug}"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/articles/{slug}/comments"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "DELETE /api/articles/{slug}/comments/{id}"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/articles/{slug}/comments"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "POST /api/articles/{slug}/favorite"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "DELETE /api/articles/{slug}/favorite"
+  },
+  {
+   "coberta": true,
+   "motivos": [],
+   "rota": "GET /api/tags"
+  }
+ ],
+ "problemas_por_tipo": {
+  "classe_base_sem_traducao": 2,
+  "classe_sem_traducao": 3,
+  "constante": 1,
+  "funcao_sem_traducao": 15,
+  "ir_sem_traducao": 2,
+  "traco_sem_traducao": 1
+ },
+ "problemas_traducao": 24,
+ "rotas": 19
+}

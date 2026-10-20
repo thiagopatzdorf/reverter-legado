@@ -1,0 +1,1038 @@
+{
+ "endpoints": 19,
+ "endpoints_exercitados": 19,
+ "endpoints_iguais": 19,
+ "fora_do_contrato": {
+  "(framework) método não permitido": {
+   "iguais": 1,
+   "igual": true,
+   "motivos": [],
+   "passos": 1
+  },
+  "(framework) rota inexistente": {
+   "iguais": 1,
+   "igual": true,
+   "motivos": [],
+   "passos": 1
+  }
+ },
+ "passos": 81,
+ "passos_iguais": 81,
+ "por_endpoint": {
+  "DELETE /api/articles/{slug}": {
+   "iguais": 4,
+   "igual": true,
+   "motivos": [],
+   "passos": 4
+  },
+  "DELETE /api/articles/{slug}/comments/{id}": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "DELETE /api/articles/{slug}/favorite": {
+   "iguais": 1,
+   "igual": true,
+   "motivos": [],
+   "passos": 1
+  },
+  "DELETE /api/profiles/{username}/follow": {
+   "iguais": 2,
+   "igual": true,
+   "motivos": [],
+   "passos": 2
+  },
+  "GET /api/articles": {
+   "iguais": 14,
+   "igual": true,
+   "motivos": [],
+   "passos": 14
+  },
+  "GET /api/articles/feed": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "GET /api/articles/{slug}": {
+   "iguais": 4,
+   "igual": true,
+   "motivos": [],
+   "passos": 4
+  },
+  "GET /api/articles/{slug}/comments": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "GET /api/profiles/{username}": {
+   "iguais": 4,
+   "igual": true,
+   "motivos": [],
+   "passos": 4
+  },
+  "GET /api/tags": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "GET /api/user": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "POST /api/articles": {
+   "iguais": 6,
+   "igual": true,
+   "motivos": [],
+   "passos": 6
+  },
+  "POST /api/articles/{slug}/comments": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "POST /api/articles/{slug}/favorite": {
+   "iguais": 2,
+   "igual": true,
+   "motivos": [],
+   "passos": 2
+  },
+  "POST /api/profiles/{username}/follow": {
+   "iguais": 3,
+   "igual": true,
+   "motivos": [],
+   "passos": 3
+  },
+  "POST /api/users": {
+   "iguais": 5,
+   "igual": true,
+   "motivos": [],
+   "passos": 5
+  },
+  "POST /api/users/login": {
+   "iguais": 5,
+   "igual": true,
+   "motivos": [],
+   "passos": 5
+  },
+  "PUT /api/articles/{slug}": {
+   "iguais": 6,
+   "igual": true,
+   "motivos": [],
+   "passos": 6
+  },
+  "PUT /api/user": {
+   "iguais": 5,
+   "igual": true,
+   "motivos": [],
+   "passos": 5
+  }
+ },
+ "por_passo": [
+  {
+   "id": 1,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/tags",
+   "rota": "GET /api/tags",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 2,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 3,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?limit=2&offset=1",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 4,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?tag=php",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 5,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?author=alice",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 6,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?favorited=alice",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 7,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?limit=abc",
+   "rota": "GET /api/articles",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 8,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?offset=-1",
+   "rota": "GET /api/articles",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 9,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/laravel-na-pratica",
+   "rota": "GET /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 10,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/nao-existe",
+   "rota": "GET /api/articles/{slug}",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 11,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/como-migrar-php/comments",
+   "rota": "GET /api/articles/{slug}/comments",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 12,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/nao-existe/comments",
+   "rota": "GET /api/articles/{slug}/comments",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 13,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/profiles/alice",
+   "rota": "GET /api/profiles/{username}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 14,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/profiles/ninguem",
+   "rota": "GET /api/profiles/{username}",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 15,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users/login",
+   "rota": "POST /api/users/login",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 16,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users/login",
+   "rota": "POST /api/users/login",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 17,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users/login",
+   "rota": "POST /api/users/login",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 18,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users/login",
+   "rota": "POST /api/users/login",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 19,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users/login",
+   "rota": "POST /api/users/login",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 20,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users",
+   "rota": "POST /api/users",
+   "status": [
+    201,
+    201
+   ]
+  },
+  {
+   "id": 21,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users",
+   "rota": "POST /api/users",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 22,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users",
+   "rota": "POST /api/users",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 23,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users",
+   "rota": "POST /api/users",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 24,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/user",
+   "rota": "GET /api/user",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 25,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/user",
+   "rota": "GET /api/user",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 26,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/user",
+   "rota": "GET /api/user",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 27,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/user",
+   "rota": "PUT /api/user",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 28,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/user",
+   "rota": "PUT /api/user",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 29,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/user",
+   "rota": "PUT /api/user",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 30,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/user",
+   "rota": "PUT /api/user",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 31,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/profiles/bruno",
+   "rota": "GET /api/profiles/{username}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 32,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/profiles/carla/follow",
+   "rota": "POST /api/profiles/{username}/follow",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 33,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/profiles/carla/follow",
+   "rota": "POST /api/profiles/{username}/follow",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 34,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/profiles/bruno/follow",
+   "rota": "DELETE /api/profiles/{username}/follow",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 35,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/profiles/ninguem/follow",
+   "rota": "DELETE /api/profiles/{username}/follow",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 36,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/profiles/bruno/follow",
+   "rota": "POST /api/profiles/{username}/follow",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 37,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/feed",
+   "rota": "GET /api/articles/feed",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 38,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/feed?limit=1",
+   "rota": "GET /api/articles/feed",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 39,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/feed",
+   "rota": "GET /api/articles/feed",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 40,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    201,
+    201
+   ]
+  },
+  {
+   "id": 41,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 42,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 43,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 44,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 45,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 46,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/novo-artigo-de-teste",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 47,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/laravel-na-pratica",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    403,
+    403
+   ]
+  },
+  {
+   "id": 48,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/artigo-revisado",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 49,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/artigo-revisado",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 50,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/nao-existe",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 51,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles/laravel-na-pratica/favorite",
+   "rota": "POST /api/articles/{slug}/favorite",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 52,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles/artigo-revisado/favorite",
+   "rota": "POST /api/articles/{slug}/favorite",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 53,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/artigo-revisado",
+   "rota": "GET /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 54,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/laravel-na-pratica/favorite",
+   "rota": "DELETE /api/articles/{slug}/favorite",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 55,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles/artigo-revisado/comments",
+   "rota": "POST /api/articles/{slug}/comments",
+   "status": [
+    201,
+    201
+   ]
+  },
+  {
+   "id": 56,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles/artigo-revisado/comments",
+   "rota": "POST /api/articles/{slug}/comments",
+   "status": [
+    422,
+    422
+   ]
+  },
+  {
+   "id": 57,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/artigo-revisado/comments",
+   "rota": "GET /api/articles/{slug}/comments",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 58,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/artigo-revisado/comments/4",
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "status": [
+    403,
+    403
+   ]
+  },
+  {
+   "id": 59,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/artigo-revisado/comments/4",
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 60,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/artigo-revisado/comments/999",
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 61,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/laravel-na-pratica",
+   "rota": "DELETE /api/articles/{slug}",
+   "status": [
+    403,
+    403
+   ]
+  },
+  {
+   "id": 62,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/artigo-revisado",
+   "rota": "DELETE /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 63,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 64,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/tags",
+   "rota": "GET /api/tags",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 65,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?tag=php&author=alice",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 66,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?limit=0",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 67,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?offset=100",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 68,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?limit=1&offset=1&tag=php",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 69,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles?favorited=carla",
+   "rota": "GET /api/articles",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 70,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/user",
+   "rota": "PUT /api/user",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 71,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/users",
+   "rota": "POST /api/users",
+   "status": [
+    201,
+    201
+   ]
+  },
+  {
+   "id": 72,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/profiles/daniela",
+   "rota": "GET /api/profiles/{username}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 73,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles",
+   "rota": "POST /api/articles",
+   "status": [
+    201,
+    201
+   ]
+  },
+  {
+   "id": 74,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/articles/acao-rapida-em-sao-paulo",
+   "rota": "GET /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 75,
+   "igual": true,
+   "motivos": [],
+   "pedido": "PUT /api/articles/acao-rapida-em-sao-paulo",
+   "rota": "PUT /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 76,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/tags",
+   "rota": "GET /api/tags",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 77,
+   "igual": true,
+   "motivos": [],
+   "pedido": "POST /api/articles/acao-rapida-em-sao-paulo/comments",
+   "rota": "POST /api/articles/{slug}/comments",
+   "status": [
+    401,
+    401
+   ]
+  },
+  {
+   "id": 78,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/nao-existe",
+   "rota": "DELETE /api/articles/{slug}",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 79,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/articles/acao-rapida-em-sao-paulo",
+   "rota": "DELETE /api/articles/{slug}",
+   "status": [
+    200,
+    200
+   ]
+  },
+  {
+   "id": 80,
+   "igual": true,
+   "motivos": [],
+   "pedido": "GET /api/rota-que-nao-existe",
+   "rota": "(framework) rota inexistente",
+   "status": [
+    404,
+    404
+   ]
+  },
+  {
+   "id": 81,
+   "igual": true,
+   "motivos": [],
+   "pedido": "DELETE /api/tags",
+   "rota": "(framework) método não permitido",
+   "status": [
+    405,
+    405
+   ]
+  }
+ ],
+ "produto": {
+  "commit": "c14fb8370b71a42a3a74b8ea936a1f96b2af9d69",
+  "laravel": "v9.17.0",
+  "licenca": "MIT",
+  "nome": "laravel-realworld-example-app",
+  "php": "8.1 (imagem php:8.1-cli)",
+  "repo": "https://github.com/f1amy/laravel-realworld-example-app"
+ }
+}

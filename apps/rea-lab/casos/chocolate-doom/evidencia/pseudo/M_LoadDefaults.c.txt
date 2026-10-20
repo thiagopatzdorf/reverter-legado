@@ -1,0 +1,83 @@
+
+undefined8 *
+FUN_1400160e0(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  int iVar1;
+  undefined8 *puVar2;
+  undefined8 *puVar3;
+  char *pcVar4;
+  char *pcVar5;
+  undefined8 uVar6;
+  
+  puVar2 = FUN_140015cd0("autoload_path",param_2,param_3,param_4);
+  if (*(int *)(puVar2 + 2) == 2) {
+    *(undefined4 *)((longlong)puVar2 + 0x1c) = 1;
+    puVar2[1] = &PTR_DAT_1400636c0;
+    iVar1 = FUN_1400032a0("-config",1);
+    if (iVar1 == 0) {
+      param_3 = 0;
+      DAT_140062d10 = FUN_140004860(DAT_1400d2200,DAT_1400d2210,(char *)0x0,param_4);
+    }
+    else {
+      DAT_140062d10 = *(char **)(DAT_1400c7178 + 8 + (longlong)iVar1 * 8);
+      FUN_1400603f0("\tdefault file: %s\n",DAT_140062d10,param_3,param_4);
+    }
+    FUN_1400603f0("saving config in %s\n",DAT_140062d10,param_3,param_4);
+    iVar1 = FUN_1400032a0("-extraconfig",1);
+    if (iVar1 == 0) {
+      DAT_140061470 = FUN_140004860(DAT_1400d2200,DAT_1400d2208,(char *)0x0,param_4);
+    }
+    else {
+      DAT_140061470 = *(char **)(DAT_1400c7178 + 8 + (longlong)iVar1 * 8);
+      FUN_1400603f0("        extra configuration file: %s\n",DAT_140061470,param_3,param_4);
+    }
+    FUN_140015f20((longlong *)&PTR_PTR_140062d00);
+    puVar2 = (undefined8 *)FUN_140015f20((longlong *)&PTR_PTR_140061460);
+    return puVar2;
+  }
+  uVar6 = 0x9ef;
+  pcVar5 = "m_config.c";
+  pcVar4 = "variable->type == DEFAULT_STRING";
+  _assert();
+  puVar2 = FUN_140015cd0(pcVar4,pcVar5,uVar6,param_4);
+  if ((*(uint *)(puVar2 + 2) < 2) || (*(uint *)(puVar2 + 2) == 4)) {
+    puVar2[1] = pcVar5;
+    *(undefined4 *)((longlong)puVar2 + 0x1c) = 1;
+    return puVar2;
+  }
+  uVar6 = 0x9d7;
+  pcVar5 = "m_config.c";
+  pcVar4 = 
+  "variable->type == DEFAULT_INT || variable->type == DEFAULT_INT_HEX || variable->type == DEFAULT_KEY"
+  ;
+  _assert();
+  puVar2 = FUN_140015cd0(pcVar4,pcVar5,uVar6,param_4);
+  if (*(int *)(puVar2 + 2) == 3) {
+    puVar2[1] = pcVar5;
+    *(undefined4 *)((longlong)puVar2 + 0x1c) = 1;
+    return puVar2;
+  }
+  uVar6 = 0x9e4;
+  pcVar5 = "m_config.c";
+  pcVar4 = "variable->type == DEFAULT_FLOAT";
+  _assert();
+  puVar2 = FUN_140015cd0(pcVar4,pcVar5,uVar6,param_4);
+  if (*(int *)(puVar2 + 2) == 2) {
+    puVar2[1] = pcVar5;
+    *(undefined4 *)((longlong)puVar2 + 0x1c) = 1;
+    return puVar2;
+  }
+  uVar6 = 0x9ef;
+  pcVar5 = "m_config.c";
+  pcVar4 = "variable->type == DEFAULT_STRING";
+  _assert();
+  puVar2 = FUN_140015cd0(pcVar4,pcVar5,uVar6,param_4);
+  puVar3 = (undefined8 *)(ulonglong)*(uint *)((longlong)puVar2 + 0x1c);
+  if (*(uint *)((longlong)puVar2 + 0x1c) != 0) {
+    FUN_140015d80((longlong)puVar2,pcVar5,uVar6,param_4);
+    puVar3 = (undefined8 *)0x1;
+  }
+  return puVar3;
+}
+

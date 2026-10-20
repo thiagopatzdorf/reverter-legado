@@ -1,0 +1,88 @@
+{
+  "binario": {
+    "exe_bytes": 24984344,
+    "exe_sha256": "d4bc6b81906832aeed79e054ed094f5e15449c8fa91285538173d4a7f90db113",
+    "extracao_segundos": 5.3,
+    "zip_sha256": "fecb76a69e29a53ea05b1d57fc2f7b7aaed5b8f889556c6eca545e2a800df1ab"
+  },
+  "comparacao": {
+    "componentes_em_comum": 1615,
+    "diferentes": [],
+    "eventos_em_comum": 1264,
+    "so_no_exe": [
+      {
+        "classe_no_codigo": true,
+        "tela": "TMadExcept"
+      },
+      {
+        "classe_no_codigo": false,
+        "tela": "TMEContactForm"
+      },
+      {
+        "classe_no_codigo": false,
+        "tela": "TMEDetailsForm"
+      },
+      {
+        "classe_no_codigo": false,
+        "tela": "TMEScrShotForm"
+      }
+    ],
+    "so_no_fonte": [],
+    "telas_em_comum": 34,
+    "telas_exe": 38,
+    "telas_fonte": 34,
+    "telas_identicas": 34,
+    "telas_sem_codigo_no_exe": [
+      "TMEContactForm",
+      "TMEDetailsForm",
+      "TMEScrShotForm",
+      "TfrmSyncDB"
+    ]
+  },
+  "exe": {
+    "arquivos": 1,
+    "componentes": 1634,
+    "eventos": 1264,
+    "eventos_implementados": 1245,
+    "formularios": 38,
+    "operacoes": 1264,
+    "pendencias": 5,
+    "rcdata_nao_formulario": 35,
+    "sql": 199,
+    "tabelas": 48,
+    "unidades": 0
+  },
+  "fonte": {
+    "arquivos": 84,
+    "componentes": 1615,
+    "eventos": 1264,
+    "eventos_implementados": 1264,
+    "formularios": 34,
+    "operacoes": 1264,
+    "pendencias": 195,
+    "sql": 364,
+    "tabelas": 66,
+    "unidades": 50
+  },
+  "pendencias_exe": [
+    "sem_fonte",
+    "tela_sem_codigo"
+  ],
+  "produto": {
+    "autor": "Ansgar Becker e colaboradores",
+    "binario_url": "https://github.com/HeidiSQL/HeidiSQL/releases/download/v12.21/HeidiSQL_12.21_64_Portable.zip",
+    "fonte_commit": "effb854",
+    "fonte_commit_titulo": "Bump version for v12.21 release",
+    "fonte_repo": "https://github.com/HeidiSQL/HeidiSQL",
+    "licenca": "GPL-2.0",
+    "nome": "HeidiSQL",
+    "site": "https://www.heidisql.com/",
+    "versao": "12.21"
+  },
+  "sql_dinamico_fonte": 195,
+  "web": {
+    "destaque": "connform",
+    "faltando": 0,
+    "telas": 38
+  }
+}

@@ -1,0 +1,127 @@
+
+longlong * FUN_140023170(char *param_1,undefined8 param_2,undefined8 param_3,char *param_4)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  longlong *plVar6;
+  size_t sVar7;
+  undefined4 *puVar8;
+  char *pcVar9;
+  char *_Source;
+  char *pcVar10;
+  char *pcVar11;
+  char *pcVar12;
+  undefined8 uVar13;
+  undefined4 *puVar14;
+  undefined8 uVar15;
+  ulonglong uVar16;
+  char local_44 [4];
+  uint local_40;
+  
+  if (*param_1 == '~') {
+    if (DAT_140146e40 != (char *)0x0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_140002a20("Prefixing a WAD filename with \'~\' indicates that the WAD should be reloaded\non each level restart, for use by level authors for rapid development. You\ncan only reload one WAD file, and it must be the last file in the -file list."
+                    ,param_2,param_3,param_4);
+    }
+    DAT_140146e40 = _strdup(param_1);
+    param_1 = param_1 + 1;
+    DAT_1400639a0 = DAT_140146e30;
+  }
+  plVar6 = (longlong *)FUN_140023a40(param_1);
+  if (plVar6 == (longlong *)0x0) {
+    FUN_1400603f0(" couldn\'t open %s\n",param_1,param_3,param_4);
+    return (longlong *)0x0;
+  }
+  sVar7 = strlen(param_1);
+  iVar3 = _stricmp(param_1 + (sVar7 - 3),"wad");
+  if (iVar3 == 0) {
+    uVar15 = 0xc;
+    FUN_140023ab0(plVar6);
+    iVar3 = strncmp(local_44,"IWAD",4);
+    uVar13 = 4;
+    iVar4 = strncmp(local_44,"PWAD",4);
+    if ((iVar3 != 0) && (iVar4 != 0)) {
+      FUN_140023aa0(plVar6);
+                    /* WARNING: Subroutine does not return */
+      FUN_140002a20("Wad file %s doesn\'t have IWAD or PWAD id\n",param_1,uVar13,uVar15);
+    }
+    uVar16 = (ulonglong)local_40;
+    if ((0xfce < (int)local_40) && (iVar4 == 0)) {
+      FUN_140023aa0(plVar6);
+                    /* WARNING: Subroutine does not return */
+      FUN_140002a20("Error: Vanilla limit for lumps in a WAD is 4046, PWAD %s has %d",param_1,
+                    (ulonglong)local_40,uVar16);
+    }
+    iVar3 = local_40 << 4;
+    puVar8 = (undefined4 *)FUN_1400255a0(iVar3,1,(undefined8 *)0x0,uVar16);
+    param_4 = (char *)(longlong)iVar3;
+    puVar14 = puVar8;
+    FUN_140023ab0(plVar6);
+    sVar7 = (size_t)(int)local_40;
+    uVar5 = local_40;
+  }
+  else {
+    puVar14 = (undefined4 *)0x0;
+    puVar8 = (undefined4 *)FUN_1400255a0(0x10,1,(undefined8 *)0x0,param_4);
+    uVar5 = 1;
+    *puVar8 = 0;
+    puVar8[1] = (int)plVar6[2];
+    FUN_140004440(param_1,(undefined8 *)(puVar8 + 2),puVar14,param_4);
+    sVar7 = 1;
+  }
+  uVar13 = 0x28;
+  pcVar9 = calloc(sVar7,0x28);
+  uVar2 = DAT_140146e30;
+  if (pcVar9 != (char *)0x0) {
+    DAT_140146e30 = uVar5 + DAT_140146e30;
+    _Source = (char *)FUN_140002c10(DAT_140146e38,(ulonglong)DAT_140146e30 << 3,puVar14,param_4);
+    DAT_140146e38 = _Source;
+    if (uVar2 < DAT_140146e30) {
+      uVar5 = DAT_140146e30 - uVar2;
+      pcVar11 = (char *)(puVar8 + 2);
+      pcVar12 = _Source + (longlong)(int)uVar2 * 8;
+      param_4 = pcVar9;
+      do {
+        _Source = pcVar11;
+        uVar1 = *(undefined4 *)(_Source + -8);
+        *(longlong **)(param_4 + 8) = plVar6;
+        puVar14 = (undefined4 *)0x8;
+        pcVar11 = _Source + 0x10;
+        *(undefined4 *)(param_4 + 0x10) = uVar1;
+        uVar1 = *(undefined4 *)(_Source + -4);
+        param_4[0x18] = '\0';
+        param_4[0x19] = '\0';
+        param_4[0x1a] = '\0';
+        param_4[0x1b] = '\0';
+        param_4[0x1c] = '\0';
+        param_4[0x1d] = '\0';
+        param_4[0x1e] = '\0';
+        param_4[0x1f] = '\0';
+        *(undefined4 *)(param_4 + 0x14) = uVar1;
+        pcVar10 = strncpy(param_4,_Source,8);
+        *(char **)pcVar12 = pcVar10;
+        param_4 = pcVar10 + 0x28;
+        pcVar12 = pcVar12 + 8;
+      } while (pcVar11 != (char *)(puVar8 + (ulonglong)uVar5 * 4 + 2));
+    }
+    FUN_1400253a0(puVar8,_Source,puVar14,param_4);
+    if (DAT_140146e58 != (void *)0x0) {
+      FUN_1400253a0(DAT_140146e58,_Source,puVar14,param_4);
+      DAT_140146e58 = (void *)0x0;
+    }
+    if (DAT_140146e40 != (char *)0x0) {
+      DAT_140146e48 = pcVar9;
+      DAT_140146e50 = plVar6;
+    }
+    return plVar6;
+  }
+  FUN_140023aa0(plVar6);
+                    /* WARNING: Subroutine does not return */
+  FUN_140002a20("Failed to allocate array for lumps from new file.",uVar13,puVar14,param_4);
+}
+

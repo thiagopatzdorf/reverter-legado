@@ -1,0 +1,22 @@
+
+void FUN_1400235d0(uint param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  longlong lVar1;
+  uint uVar2;
+  
+  if (DAT_140146e30 <= param_1) {
+                    /* WARNING: Subroutine does not return */
+    FUN_140002a20("W_ReadLump: %i >= numlumps",(ulonglong)param_1,param_3,param_4);
+  }
+  lVar1 = *(longlong *)(DAT_140146e38 + (longlong)(int)param_1 * 8);
+  FUN_1400210e0((longlong)*(int *)(lVar1 + 0x14));
+  uVar2 = FUN_140023ab0(*(longlong **)(lVar1 + 8));
+  if ((int)*(uint *)(lVar1 + 0x14) <= (int)uVar2) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_140002a20("W_ReadLump: only read %i of %i on lump %i",(ulonglong)uVar2,
+                (ulonglong)*(uint *)(lVar1 + 0x14),(ulonglong)param_1);
+}
+

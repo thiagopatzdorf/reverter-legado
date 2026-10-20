@@ -1,0 +1,14 @@
+
+void FUN_140023560(char *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  uint uVar1;
+  
+  uVar1 = FUN_140023440(param_1);
+  if (-1 < (int)uVar1) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_140002a20("W_GetNumForName: %s not found!",param_1,param_3,param_4);
+}
+

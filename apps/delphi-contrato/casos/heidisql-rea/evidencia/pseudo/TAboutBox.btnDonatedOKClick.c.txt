@@ -1,0 +1,36 @@
+void FUN_011a60b0(longlong param_1)
+
+{
+  char cVar1;
+  undefined8 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined8 local_20 [2];
+  
+  local_38 = 0;
+  local_30 = 0;
+  local_28 = 0;
+  local_20[0] = 0;
+  FUN_006ccca0(*(undefined8 *)(param_1 + 0x788),local_20);
+  FUN_00d551a0(*(undefined8 *)PTR_DAT_014061d8,0x11e,local_20[0],0);
+  cVar1 = FUN_01270d10(*(undefined8 *)PTR_DAT_01406048,1);
+  if (cVar1 == '\0') {
+    FUN_00a89c20(&local_28,L"Could not check donation state.");
+    FUN_00d43650(local_28,0,4);
+  }
+  else if (cVar1 == '\x01') {
+    FUN_00a89c20(&local_30,L"Not a valid donor email address");
+    FUN_00d44930(local_30);
+  }
+  else if (cVar1 == '\x02') {
+    FUN_00a89c20(&local_38,L"Thanks for donating!");
+    FUN_00d43650(local_38,2,4);
+  }
+  FUN_006ccaf0(*(undefined8 *)(param_1 + 0x7b8),cVar1 != '\x02');
+  FUN_006ccaf0(*(undefined8 *)(*(longlong *)PTR_DAT_01406048 + 0x19d0),
+               *(undefined1 *)(*(longlong *)(param_1 + 0x7b8) + 0xa9));
+  FUN_012284d0(*(undefined8 *)PTR_DAT_01406048,param_1);
+  FUN_00412400(&local_38,3);
+  FUN_00412320(local_20);
+  return;
+}

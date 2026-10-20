@@ -1,0 +1,14 @@
+# Leitor de PHP (MIT): só para extrair o contrato.
+tree-sitter==0.26.0
+tree-sitter-php==0.25.1
+# Runtime do app gerado (o gerador copia a lista para requirements.txt do app).
+fastapi==0.149.0
+starlette==1.9.0
+pydantic==2.14.1
+SQLAlchemy==2.1.5
+uvicorn==0.54.0
+bcrypt==5.0.0
+regex==2026.9.29
+# Testes
+httpx==0.28.1
+pytest==8.4.2

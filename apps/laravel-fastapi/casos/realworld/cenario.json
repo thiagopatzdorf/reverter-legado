@@ -1,0 +1,744 @@
+{
+ "descricao": "Cenário do diferencial do caso RealWorld: cada rota com caminho feliz, erro de validação, 404 e 401/403 quando cabe. Fichas JWT são capturadas de cada lado separadamente.",
+ "volateis_extra": [],
+ "rotas": [
+  "DELETE /api/articles/{slug}",
+  "DELETE /api/articles/{slug}/comments/{id}",
+  "DELETE /api/articles/{slug}/favorite",
+  "DELETE /api/profiles/{username}/follow",
+  "GET /api/articles",
+  "GET /api/articles/feed",
+  "GET /api/articles/{slug}",
+  "GET /api/articles/{slug}/comments",
+  "GET /api/profiles/{username}",
+  "GET /api/tags",
+  "GET /api/user",
+  "POST /api/articles",
+  "POST /api/articles/{slug}/comments",
+  "POST /api/articles/{slug}/favorite",
+  "POST /api/profiles/{username}/follow",
+  "POST /api/users",
+  "POST /api/users/login",
+  "PUT /api/articles/{slug}",
+  "PUT /api/user"
+ ],
+ "passos": [
+  {
+   "id": 1,
+   "rota": "GET /api/tags",
+   "metodo": "GET",
+   "caminho": "/api/tags"
+  },
+  {
+   "id": 2,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles"
+  },
+  {
+   "id": 3,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?limit=2&offset=1"
+  },
+  {
+   "id": 4,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?tag=php"
+  },
+  {
+   "id": 5,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?author=alice"
+  },
+  {
+   "id": 6,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?favorited=alice"
+  },
+  {
+   "id": 7,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?limit=abc"
+  },
+  {
+   "id": 8,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?offset=-1"
+  },
+  {
+   "id": 9,
+   "rota": "GET /api/articles/{slug}",
+   "metodo": "GET",
+   "caminho": "/api/articles/laravel-na-pratica"
+  },
+  {
+   "id": 10,
+   "rota": "GET /api/articles/{slug}",
+   "metodo": "GET",
+   "caminho": "/api/articles/nao-existe"
+  },
+  {
+   "id": 11,
+   "rota": "GET /api/articles/{slug}/comments",
+   "metodo": "GET",
+   "caminho": "/api/articles/como-migrar-php/comments"
+  },
+  {
+   "id": 12,
+   "rota": "GET /api/articles/{slug}/comments",
+   "metodo": "GET",
+   "caminho": "/api/articles/nao-existe/comments"
+  },
+  {
+   "id": 13,
+   "rota": "GET /api/profiles/{username}",
+   "metodo": "GET",
+   "caminho": "/api/profiles/alice"
+  },
+  {
+   "id": 14,
+   "rota": "GET /api/profiles/{username}",
+   "metodo": "GET",
+   "caminho": "/api/profiles/ninguem"
+  },
+  {
+   "id": 15,
+   "rota": "POST /api/users/login",
+   "metodo": "POST",
+   "caminho": "/api/users/login",
+   "corpo": {
+    "user": {
+     "email": "alice@exemplo.io",
+     "password": "senha-alice-1"
+    }
+   },
+   "capturar": {
+    "alice": "user.token"
+   }
+  },
+  {
+   "id": 16,
+   "rota": "POST /api/users/login",
+   "metodo": "POST",
+   "caminho": "/api/users/login",
+   "corpo": {
+    "user": {
+     "email": "bruno@exemplo.io",
+     "password": "senha-bruno-2"
+    }
+   },
+   "capturar": {
+    "bruno": "user.token"
+   }
+  },
+  {
+   "id": 17,
+   "rota": "POST /api/users/login",
+   "metodo": "POST",
+   "caminho": "/api/users/login",
+   "corpo": {
+    "user": {
+     "email": "carla@exemplo.io",
+     "password": "senha-carla-3"
+    }
+   },
+   "capturar": {
+    "carla": "user.token"
+   }
+  },
+  {
+   "id": 18,
+   "rota": "POST /api/users/login",
+   "metodo": "POST",
+   "caminho": "/api/users/login",
+   "corpo": {
+    "user": {
+     "email": "alice@exemplo.io",
+     "password": "errada"
+    }
+   }
+  },
+  {
+   "id": 19,
+   "rota": "POST /api/users/login",
+   "metodo": "POST",
+   "caminho": "/api/users/login",
+   "corpo": {
+    "user": {}
+   }
+  },
+  {
+   "id": 20,
+   "rota": "POST /api/users",
+   "metodo": "POST",
+   "caminho": "/api/users",
+   "corpo": {
+    "user": {
+     "username": "dani",
+     "email": "dani@exemplo.io",
+     "password": "senha-dani-4"
+    }
+   },
+   "capturar": {
+    "dani": "user.token"
+   }
+  },
+  {
+   "id": 21,
+   "rota": "POST /api/users",
+   "metodo": "POST",
+   "caminho": "/api/users",
+   "corpo": {
+    "user": {
+     "username": "dani",
+     "email": "outra",
+     "password": "curta"
+    }
+   }
+  },
+  {
+   "id": 22,
+   "rota": "POST /api/users",
+   "metodo": "POST",
+   "caminho": "/api/users",
+   "corpo": {}
+  },
+  {
+   "id": 23,
+   "rota": "POST /api/users",
+   "metodo": "POST",
+   "caminho": "/api/users",
+   "corpo": {
+    "user": {
+     "username": "com espaço",
+     "email": " eva@exemplo.io ",
+     "password": "senha-eva-55"
+    }
+   }
+  },
+  {
+   "id": 24,
+   "rota": "GET /api/user",
+   "metodo": "GET",
+   "caminho": "/api/user",
+   "ficha": "alice"
+  },
+  {
+   "id": 25,
+   "rota": "GET /api/user",
+   "metodo": "GET",
+   "caminho": "/api/user"
+  },
+  {
+   "id": 26,
+   "rota": "GET /api/user",
+   "metodo": "GET",
+   "caminho": "/api/user",
+   "headers": {
+    "Authorization": "Token nao.e.jwt"
+   }
+  },
+  {
+   "id": 27,
+   "rota": "PUT /api/user",
+   "metodo": "PUT",
+   "caminho": "/api/user",
+   "ficha": "alice",
+   "corpo": {
+    "user": {
+     "bio": "Agora escreve sobre FastAPI."
+    }
+   }
+  },
+  {
+   "id": 28,
+   "rota": "PUT /api/user",
+   "metodo": "PUT",
+   "caminho": "/api/user",
+   "ficha": "alice",
+   "corpo": {
+    "user": {}
+   }
+  },
+  {
+   "id": 29,
+   "rota": "PUT /api/user",
+   "metodo": "PUT",
+   "caminho": "/api/user",
+   "ficha": "alice",
+   "corpo": {
+    "user": {
+     "image": "nao-e-url",
+     "email": "bruno@exemplo.io"
+    }
+   }
+  },
+  {
+   "id": 30,
+   "rota": "PUT /api/user",
+   "metodo": "PUT",
+   "caminho": "/api/user",
+   "ficha": "dani",
+   "corpo": {
+    "user": {
+     "username": "daniela",
+     "image": null
+    }
+   }
+  },
+  {
+   "id": 31,
+   "rota": "GET /api/profiles/{username}",
+   "metodo": "GET",
+   "caminho": "/api/profiles/bruno",
+   "ficha": "alice"
+  },
+  {
+   "id": 32,
+   "rota": "POST /api/profiles/{username}/follow",
+   "metodo": "POST",
+   "caminho": "/api/profiles/carla/follow",
+   "ficha": "alice"
+  },
+  {
+   "id": 33,
+   "rota": "POST /api/profiles/{username}/follow",
+   "metodo": "POST",
+   "caminho": "/api/profiles/carla/follow",
+   "ficha": "alice"
+  },
+  {
+   "id": 34,
+   "rota": "DELETE /api/profiles/{username}/follow",
+   "metodo": "DELETE",
+   "caminho": "/api/profiles/bruno/follow",
+   "ficha": "alice"
+  },
+  {
+   "id": 35,
+   "rota": "DELETE /api/profiles/{username}/follow",
+   "metodo": "DELETE",
+   "caminho": "/api/profiles/ninguem/follow",
+   "ficha": "alice"
+  },
+  {
+   "id": 36,
+   "rota": "POST /api/profiles/{username}/follow",
+   "metodo": "POST",
+   "caminho": "/api/profiles/bruno/follow"
+  },
+  {
+   "id": 37,
+   "rota": "GET /api/articles/feed",
+   "metodo": "GET",
+   "caminho": "/api/articles/feed",
+   "ficha": "alice"
+  },
+  {
+   "id": 38,
+   "rota": "GET /api/articles/feed",
+   "metodo": "GET",
+   "caminho": "/api/articles/feed?limit=1",
+   "ficha": "bruno"
+  },
+  {
+   "id": 39,
+   "rota": "GET /api/articles/feed",
+   "metodo": "GET",
+   "caminho": "/api/articles/feed"
+  },
+  {
+   "id": 40,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "title": "Novo artigo de teste",
+     "description": "Descrição",
+     "body": "Corpo novo.",
+     "tagList": [
+      "php",
+      "contrato"
+     ]
+    }
+   }
+  },
+  {
+   "id": 41,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "title": "Novo artigo de teste",
+     "description": "Outra",
+     "body": "Outro."
+    }
+   }
+  },
+  {
+   "id": 42,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "description": "Sem título"
+    }
+   }
+  },
+  {
+   "id": 43,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "ficha": "bruno",
+   "corpo": {
+    "article": {
+     "title": "Tags erradas",
+     "description": "d",
+     "body": "b",
+     "tagList": "php"
+    }
+   }
+  },
+  {
+   "id": 44,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "corpo": {
+    "article": {
+     "title": "Sem login",
+     "description": "d",
+     "body": "b"
+    }
+   }
+  },
+  {
+   "id": 45,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles",
+   "ficha": "alice"
+  },
+  {
+   "id": 46,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/novo-artigo-de-teste",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "title": "Artigo revisado"
+    }
+   }
+  },
+  {
+   "id": 47,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/laravel-na-pratica",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "body": "Tentando editar o do Bruno."
+    }
+   }
+  },
+  {
+   "id": 48,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/artigo-revisado",
+   "ficha": "alice",
+   "corpo": {
+    "article": {}
+   }
+  },
+  {
+   "id": 49,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/artigo-revisado",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "title": "Contratos de API"
+    }
+   }
+  },
+  {
+   "id": 50,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/nao-existe",
+   "ficha": "alice",
+   "corpo": {
+    "article": {
+     "body": "x"
+    }
+   }
+  },
+  {
+   "id": 51,
+   "rota": "POST /api/articles/{slug}/favorite",
+   "metodo": "POST",
+   "caminho": "/api/articles/laravel-na-pratica/favorite",
+   "ficha": "carla"
+  },
+  {
+   "id": 52,
+   "rota": "POST /api/articles/{slug}/favorite",
+   "metodo": "POST",
+   "caminho": "/api/articles/artigo-revisado/favorite",
+   "ficha": "bruno"
+  },
+  {
+   "id": 53,
+   "rota": "GET /api/articles/{slug}",
+   "metodo": "GET",
+   "caminho": "/api/articles/artigo-revisado",
+   "ficha": "bruno"
+  },
+  {
+   "id": 54,
+   "rota": "DELETE /api/articles/{slug}/favorite",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/laravel-na-pratica/favorite",
+   "ficha": "alice"
+  },
+  {
+   "id": 55,
+   "rota": "POST /api/articles/{slug}/comments",
+   "metodo": "POST",
+   "caminho": "/api/articles/artigo-revisado/comments",
+   "ficha": "bruno",
+   "corpo": {
+    "comment": {
+     "body": "Comentário novo."
+    }
+   }
+  },
+  {
+   "id": 56,
+   "rota": "POST /api/articles/{slug}/comments",
+   "metodo": "POST",
+   "caminho": "/api/articles/artigo-revisado/comments",
+   "ficha": "bruno",
+   "corpo": {
+    "comment": {
+     "body": "   "
+    }
+   }
+  },
+  {
+   "id": 57,
+   "rota": "GET /api/articles/{slug}/comments",
+   "metodo": "GET",
+   "caminho": "/api/articles/artigo-revisado/comments",
+   "ficha": "alice"
+  },
+  {
+   "id": 58,
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/artigo-revisado/comments/4",
+   "ficha": "alice"
+  },
+  {
+   "id": 59,
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/artigo-revisado/comments/4",
+   "ficha": "bruno"
+  },
+  {
+   "id": 60,
+   "rota": "DELETE /api/articles/{slug}/comments/{id}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/artigo-revisado/comments/999",
+   "ficha": "bruno"
+  },
+  {
+   "id": 61,
+   "rota": "DELETE /api/articles/{slug}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/laravel-na-pratica",
+   "ficha": "alice"
+  },
+  {
+   "id": 62,
+   "rota": "DELETE /api/articles/{slug}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/artigo-revisado",
+   "ficha": "alice"
+  },
+  {
+   "id": 63,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles"
+  },
+  {
+   "id": 64,
+   "rota": "GET /api/tags",
+   "metodo": "GET",
+   "caminho": "/api/tags"
+  },
+  {
+   "id": 65,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?tag=php&author=alice"
+  },
+  {
+   "id": 66,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?limit=0"
+  },
+  {
+   "id": 67,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?offset=100"
+  },
+  {
+   "id": 68,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?limit=1&offset=1&tag=php"
+  },
+  {
+   "id": 69,
+   "rota": "GET /api/articles",
+   "metodo": "GET",
+   "caminho": "/api/articles?favorited=carla",
+   "ficha": "carla"
+  },
+  {
+   "id": 70,
+   "rota": "PUT /api/user",
+   "metodo": "PUT",
+   "caminho": "/api/user",
+   "ficha": "alice",
+   "corpo": {
+    "user": {
+     "bio": "Agora escreve sobre FastAPI."
+    }
+   }
+  },
+  {
+   "id": 71,
+   "rota": "POST /api/users",
+   "metodo": "POST",
+   "caminho": "/api/users",
+   "corpo": {
+    "user": {
+     "username": "eva",
+     "email": "Eva@Exemplo.io ",
+     "password": "senha-eva-5555"
+    }
+   }
+  },
+  {
+   "id": 72,
+   "rota": "GET /api/profiles/{username}",
+   "metodo": "GET",
+   "caminho": "/api/profiles/daniela",
+   "ficha": "bruno"
+  },
+  {
+   "id": 73,
+   "rota": "POST /api/articles",
+   "metodo": "POST",
+   "caminho": "/api/articles",
+   "ficha": "carla",
+   "corpo": {
+    "article": {
+     "title": "Ação rápida em São Paulo",
+     "description": "Acentos no título",
+     "body": "Corpo.",
+     "tagList": [
+      "café",
+      "php",
+      "php"
+     ]
+    }
+   }
+  },
+  {
+   "id": 74,
+   "rota": "GET /api/articles/{slug}",
+   "metodo": "GET",
+   "caminho": "/api/articles/acao-rapida-em-sao-paulo",
+   "ficha": "alice"
+  },
+  {
+   "id": 75,
+   "rota": "PUT /api/articles/{slug}",
+   "metodo": "PUT",
+   "caminho": "/api/articles/acao-rapida-em-sao-paulo",
+   "ficha": "carla",
+   "corpo": {
+    "article": {
+     "description": "Só a descrição mudou"
+    }
+   }
+  },
+  {
+   "id": 76,
+   "rota": "GET /api/tags",
+   "metodo": "GET",
+   "caminho": "/api/tags"
+  },
+  {
+   "id": 77,
+   "rota": "POST /api/articles/{slug}/comments",
+   "metodo": "POST",
+   "caminho": "/api/articles/acao-rapida-em-sao-paulo/comments",
+   "corpo": {
+    "comment": {
+     "body": "Sem login."
+    }
+   }
+  },
+  {
+   "id": 78,
+   "rota": "DELETE /api/articles/{slug}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/nao-existe",
+   "ficha": "alice"
+  },
+  {
+   "id": 79,
+   "rota": "DELETE /api/articles/{slug}",
+   "metodo": "DELETE",
+   "caminho": "/api/articles/acao-rapida-em-sao-paulo",
+   "ficha": "carla"
+  },
+  {
+   "id": 80,
+   "rota": "(framework) rota inexistente",
+   "metodo": "GET",
+   "caminho": "/api/rota-que-nao-existe"
+  },
+  {
+   "id": 81,
+   "rota": "(framework) método não permitido",
+   "metodo": "DELETE",
+   "caminho": "/api/tags"
+  }
+ ]
+}

@@ -1,0 +1,105 @@
+{
+ "causas_mais_comuns_na_api": [
+  {
+   "detalhe": "Illuminate\\Session\\Middleware\\StartSession",
+   "rotas": 82,
+   "tipo": "classe_base_sem_traducao"
+  },
+  {
+   "detalhe": "session",
+   "rotas": 82,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "url",
+   "rotas": 48,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "League\\Flysystem\\WhitespacePathNormalizer",
+   "rotas": 41,
+   "tipo": "classe_sem_traducao"
+  },
+  {
+   "detalhe": "file_get_contents",
+   "rotas": 38,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "Illuminate\\Support\\Facades\\DB::raw",
+   "rotas": 36,
+   "tipo": "metodo_sem_traducao"
+  },
+  {
+   "detalhe": "array_push",
+   "rotas": 36,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "file_exists",
+   "rotas": 36,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "libxml_use_internal_errors",
+   "rotas": 34,
+   "tipo": "funcao_sem_traducao"
+  },
+  {
+   "detalhe": "DOMDocument",
+   "rotas": 34,
+   "tipo": "classe_sem_traducao"
+  }
+ ],
+ "contrato": {
+  "classes": 502,
+  "colunas": 278,
+  "controllers": 72,
+  "form_requests": 0,
+  "funcoes_globais": 6,
+  "metodos": 2244,
+  "models": 35,
+  "pendencias": 392,
+  "pendencias_por_tipo": {
+   "evento": 1,
+   "job": 20,
+   "migration_nao_lida": 163,
+   "pacote": 79,
+   "php_nao_lido": 89,
+   "sql_cru": 40
+  },
+  "recursos": 0,
+  "relacoes": 63,
+  "rotas": 340,
+  "rotas_com_controller": 340,
+  "tabelas": 40
+ },
+ "gerador": {
+  "api_cobertas": 0,
+  "cobertas": 0,
+  "problemas_por_tipo": {
+   "atribuicao": 1,
+   "classe_base_sem_traducao": 34,
+   "classe_sem_traducao": 157,
+   "constante": 24,
+   "constante_sem_traducao": 2,
+   "foreach_alvo": 2,
+   "funcao_sem_traducao": 555,
+   "ir_sem_traducao": 3,
+   "metodo_sem_traducao": 57,
+   "php_nao_lido": 71,
+   "superglobal": 1,
+   "traco_sem_traducao": 7
+  },
+  "problemas_traducao": 914,
+  "rotas": 340
+ },
+ "produto": {
+  "commit": "31d94dd8b98e3334dc01b66bed6d514719a2f85d",
+  "licenca": "MIT",
+  "nome": "BookStack",
+  "repo": "https://github.com/BookStackApp/BookStack",
+  "tag": "v26.09.1"
+ },
+ "rotas_api": 82
+}

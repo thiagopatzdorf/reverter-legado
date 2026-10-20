@@ -1,0 +1,57 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_140027eb0(undefined8 param_1,undefined4 *param_2,undefined8 param_3,short *param_4)
+
+{
+  int iVar1;
+  char *pcVar2;
+  undefined8 uVar3;
+  ulonglong uVar4;
+  int *piVar5;
+  
+  if (DAT_140148fe4 == 3) {
+    if ((DAT_140149b70 != 5) && (param_2 = &DAT_1401495c0, DAT_140149b30 == 0 && DAT_1401495c0 == 0)
+       ) goto LAB_140027ed6;
+    puts(
+        " WARNING: You are playing using one of the Doom Classic\n IWAD files shipped with the Doom 3: BFG Edition. These are\n known to be incompatible with the regular IWAD files and\n may cause demos and network games to get out of sync."
+        );
+  }
+  if (DAT_1401495c0 != 0) {
+    FUN_14002dd60((ulonglong)DAT_1401495c0,param_2,param_3,param_4);
+  }
+LAB_140027ed6:
+  _DAT_140148ef0 = 1;
+  FUN_14000ff40(DAT_140148f50);
+  FUN_140010030();
+  FUN_14000f850(FUN_1400275e0);
+  uVar3 = 0x80;
+  piVar5 = (int *)0x80;
+  pcVar2 = "";
+  FUN_14000ffa0(&DAT_1400970c0,0x80,0x80);
+  FUN_140010430(pcVar2,uVar3,(char *)piVar5,(ulonglong)param_4);
+  uVar4 = (ulonglong)DAT_1400649e8;
+  if (DAT_1400649e8 != 0) {
+    iVar1 = FUN_140003390("-cdrom");
+    if (iVar1 < 1) {
+      pcVar2 = FUN_140007b60("STDISK");
+    }
+    else {
+      pcVar2 = FUN_140007b60("STCDROM");
+    }
+    piVar5 = (int *)0xb8;
+    uVar4 = 0x130;
+    FUN_140020fa0(pcVar2,0x130,0xb8,(ulonglong)param_4);
+  }
+  FUN_140006f30();
+  FUN_1400221d0();
+  FUN_140047a20();
+  FUN_140006b00();
+  if (DAT_14014958c != 0) {
+    DAT_1400649e4 = DAT_140149b6c;
+  }
+  do {
+    FUN_140027da0(pcVar2,uVar4,piVar5,param_4);
+  } while( true );
+}
+

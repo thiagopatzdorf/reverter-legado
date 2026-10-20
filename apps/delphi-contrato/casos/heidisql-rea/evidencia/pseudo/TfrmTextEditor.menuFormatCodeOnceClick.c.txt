@@ -1,0 +1,79 @@
+void FUN_00fb1c00(longlong param_1)
+
+{
+  longlong *plVar1;
+  char cVar2;
+  undefined8 uVar3;
+  undefined1 auStack_a8 [48];
+  undefined8 local_78;
+  undefined8 local_70;
+  undefined8 local_68;
+  undefined8 local_60;
+  undefined8 local_58;
+  undefined8 local_50;
+  undefined8 local_48;
+  undefined1 *local_40;
+  undefined8 local_38;
+  longlong *local_30;
+  undefined8 local_28;
+  
+  local_40 = auStack_a8;
+  local_78 = 0;
+  local_70 = 0;
+  local_68 = 0;
+  local_58 = 0;
+  local_60 = 0;
+  local_50 = 0;
+  local_48 = 0;
+  local_38 = 0;
+  uVar3 = *(undefined8 *)(param_1 + 0x880);
+  cVar2 = FUN_0040f490(uVar3,&PTR_FUN_00f28ab8);
+  if (cVar2 == '\0') {
+    cVar2 = FUN_0040f490(uVar3,&PTR_FUN_0091daf0);
+    if (cVar2 == '\0') {
+      cVar2 = FUN_0040f490(uVar3,&PTR_FUN_00faa478);
+      if (cVar2 == '\0') {
+        MessageBeep(0x30);
+      }
+      else {
+        local_30 = (longlong *)FUN_00dcc4c0(&PTR_FUN_00dc7268,1);
+        (**(code **)(*local_30 + 0xb8))(local_30);
+        plVar1 = *(longlong **)(*(longlong *)(param_1 + 0x7e8) + 0x528);
+        (**(code **)(*plVar1 + 0x38))(plVar1,&local_38);
+        FUN_00491ef0(&local_38,&local_68);
+        (**(code **)(*local_30 + 0x48))(local_30,local_68);
+        FUN_00904f40(*(undefined8 *)(param_1 + 0x7e8));
+        (**(code **)(*local_30 + 0x50))(local_30,&local_70);
+        plVar1 = *(longlong **)(*(longlong *)(param_1 + 0x7e8) + 0x528);
+        (**(code **)(*plVar1 + 0x60))(plVar1,local_70);
+        FUN_00904f80(*(undefined8 *)(param_1 + 0x7e8));
+        FUN_0040efa0(local_30);
+        FUN_00905140(*(undefined8 *)(param_1 + 0x7e8),0);
+        FUN_0090c480(*(undefined8 *)(param_1 + 0x7e8),0);
+      }
+    }
+    else {
+      uVar3 = FUN_00d62be0(&PTR_FUN_00e979b8,1,param_1);
+      *(undefined8 *)PTR_DAT_01408548 = uVar3;
+      uVar3 = *(undefined8 *)(param_1 + 0x7e8);
+      FUN_008ef320(uVar3,&local_60);
+      FUN_00e98d80(*(undefined8 *)PTR_DAT_01408548,&local_58,local_60);
+      FUN_008f89f0(uVar3,local_58);
+      FUN_00905140(*(undefined8 *)(param_1 + 0x7e8),0);
+      FUN_0090c480(*(undefined8 *)(param_1 + 0x7e8),0);
+      FUN_0040efa0(*(undefined8 *)PTR_DAT_01408548);
+    }
+  }
+  else {
+    FUN_008ef320(*(undefined8 *)(param_1 + 0x7e8),&local_48);
+    local_28 = FUN_00d7bbc0(local_48,0,0);
+    FUN_00d798c0(local_28,&local_50,4);
+    FUN_008f89f0(*(undefined8 *)(param_1 + 0x7e8),local_50);
+    FUN_0040efa0(local_28);
+    FUN_00905140(*(undefined8 *)(param_1 + 0x7e8),0);
+    FUN_0090c480(*(undefined8 *)(param_1 + 0x7e8),0);
+  }
+  FUN_00412400(&local_78,7);
+  FUN_00412320(&local_38);
+  return;
+}

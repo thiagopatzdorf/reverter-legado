@@ -1,0 +1,60 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined8 FUN_14003ca00(void)
+
+{
+  char cVar1;
+  byte bVar2;
+  byte bVar3;
+  byte bVar4;
+  uint uVar5;
+  int iVar6;
+  char *pcVar7;
+  char *pcVar8;
+  uint *puVar9;
+  uint *puVar10;
+  undefined1 local_38 [16];
+  char local_28 [16];
+  char local_18 [8];
+  
+  iVar6 = 0x18;
+  do {
+    FUN_14003c550();
+    FUN_14003c550();
+    iVar6 = iVar6 + -2;
+  } while (iVar6 != 0);
+  pcVar7 = local_28;
+  do {
+    cVar1 = FUN_14003c550();
+    pcVar8 = pcVar7 + 1;
+    *pcVar7 = cVar1;
+    pcVar7 = pcVar8;
+  } while (pcVar8 != local_18);
+  local_38 = (undefined1  [16])0x0;
+  uVar5 = FUN_14002dd40();
+  FUN_140004a20((longlong)local_38,0x10,"version %i",(ulonglong)uVar5);
+  iVar6 = strcmp(local_28,local_38);
+  if (iVar6 != 0) {
+    return 0;
+  }
+  bVar2 = FUN_14003c550();
+  DAT_140149b68 = (uint)bVar2;
+  bVar2 = FUN_14003c550();
+  DAT_140149b60 = (uint)bVar2;
+  bVar2 = FUN_14003c550();
+  DAT_140149b5c = (uint)bVar2;
+  puVar9 = &DAT_140149b20;
+  do {
+    bVar2 = FUN_14003c550();
+    puVar10 = puVar9 + 1;
+    *puVar9 = (uint)bVar2;
+    puVar9 = puVar10;
+  } while (puVar10 != &DAT_140149b30);
+  bVar2 = FUN_14003c550();
+  bVar3 = FUN_14003c550();
+  bVar4 = FUN_14003c550();
+  _DAT_14014cf78 = (uint)bVar2 * 0x10000 + (uint)bVar3 * 0x100 + (uint)bVar4;
+  return 1;
+}
+

@@ -1,0 +1,53 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_14002dad0(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  undefined4 uVar1;
+  bool bVar2;
+  undefined8 uVar3;
+  undefined7 extraout_var;
+  ulonglong uVar4;
+  FILE *pFVar5;
+  undefined4 *puVar6;
+  ulonglong uVar7;
+  
+  DAT_140149b70 = 0;
+  DAT_14014c440 = FUN_140003c10(&DAT_140149080,"rb");
+  if (DAT_14014c440 == (FILE *)0x0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_140002a20("Could not load savegame %s",&DAT_140149080,param_3,param_4);
+  }
+  DAT_14014c434 = 0;
+  uVar3 = FUN_14003ca00();
+  uVar1 = _DAT_14014cf78;
+  if ((int)uVar3 == 0) {
+    fclose(DAT_14014c440);
+    return;
+  }
+  uVar7 = (ulonglong)DAT_140149b5c;
+  puVar6 = (undefined4 *)(ulonglong)DAT_140149b60;
+  uVar4 = (ulonglong)DAT_140149b68;
+  FUN_14002d780(DAT_140149b68,puVar6,DAT_140149b5c,param_4);
+  _DAT_14014cf78 = uVar1;
+  FUN_14003d4b0();
+  FUN_14003dfb0();
+  FUN_14003ea10(uVar4,puVar6,uVar7,param_4);
+  FUN_140040030(uVar4,puVar6,uVar7,param_4);
+  bVar2 = FUN_14003cb20();
+  if ((int)CONCAT71(extraout_var,bVar2) == 0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_140002a20("Bad savegame",puVar6,uVar7,param_4);
+  }
+  pFVar5 = DAT_14014c440;
+  fclose(DAT_14014c440);
+  if (DAT_14014ff88 == 0) {
+    FUN_140046e80(pFVar5,puVar6,uVar7,param_4);
+    return;
+  }
+  FUN_140047a20();
+  FUN_140046e80(pFVar5,puVar6,uVar7,param_4);
+  return;
+}
+

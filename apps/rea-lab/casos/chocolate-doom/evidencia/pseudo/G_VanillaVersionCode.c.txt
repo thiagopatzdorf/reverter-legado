@@ -1,0 +1,13 @@
+
+int FUN_14002dd40(void)
+
+{
+  int iVar1;
+  
+  iVar1 = DAT_140064a20 + 0x68;
+  if (2 < DAT_140064a20 - 2U) {
+    iVar1 = 0x6d;
+  }
+  return iVar1;
+}
+

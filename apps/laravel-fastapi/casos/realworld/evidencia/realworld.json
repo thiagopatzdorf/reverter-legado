@@ -1,0 +1,367 @@
+{
+ "banco_semeado_sha256": "02cba827af8ce4be3b1e16bb845e84820a5ca7ec718f5dd6cdb8348067dd36f5",
+ "contrato": {
+  "classes": 61,
+  "colunas": 54,
+  "controllers": 7,
+  "form_requests": 9,
+  "funcoes_globais": 0,
+  "metodos": 132,
+  "models": 4,
+  "pendencias": 1,
+  "pendencias_por_tipo": {
+   "pacote": 1
+  },
+  "recursos": 8,
+  "relacoes": 12,
+  "rotas": 19,
+  "rotas_com_controller": 19,
+  "tabelas": 10
+ },
+ "controle_negativo": {
+  "endpoints": 19,
+  "endpoints_iguais": 0,
+  "passos": 81,
+  "passos_iguais": 0
+ },
+ "diferencial": {
+  "endpoints": 19,
+  "endpoints_exercitados": 19,
+  "endpoints_iguais": 19,
+  "passos": 81,
+  "passos_iguais": 81
+ },
+ "esquema": {
+  "colunas": 54,
+  "diferencas": [],
+  "tabelas": 10
+ },
+ "gerador": {
+  "cobertas": 19,
+  "problemas_por_tipo": {
+   "classe_base_sem_traducao": 2,
+   "classe_sem_traducao": 3,
+   "constante": 1,
+   "funcao_sem_traducao": 15,
+   "ir_sem_traducao": 2,
+   "traco_sem_traducao": 1
+  },
+  "problemas_traducao": 24,
+  "rotas": 19
+ },
+ "pendencias": [
+  {
+   "detalhe": "Laravel",
+   "onde": "Laravel\\Sanctum\\HasApiTokens",
+   "tipo": "pacote"
+  }
+ ],
+ "produto": {
+  "commit": "c14fb8370b71a42a3a74b8ea936a1f96b2af9d69",
+  "laravel": "v9.17.0",
+  "licenca": "MIT",
+  "nome": "laravel-realworld-example-app",
+  "php": "8.1 (imagem php:8.1-cli)",
+  "repo": "https://github.com/f1amy/laravel-realworld-example-app"
+ },
+ "rotas": [
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\UserController",
+    "metodo": "show",
+    "tipo": "controller"
+   },
+   "caminho": "/api/user",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\UserController",
+    "metodo": "update",
+    "tipo": "controller"
+   },
+   "caminho": "/api/user",
+   "metodos": [
+    "PUT"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\AuthController",
+    "metodo": "login",
+    "tipo": "controller"
+   },
+   "caminho": "/api/users/login",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\AuthController",
+    "metodo": "register",
+    "tipo": "controller"
+   },
+   "caminho": "/api/users",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\ProfileController",
+    "metodo": "follow",
+    "tipo": "controller"
+   },
+   "caminho": "/api/profiles/{username}/follow",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\ProfileController",
+    "metodo": "unfollow",
+    "tipo": "controller"
+   },
+   "caminho": "/api/profiles/{username}/follow",
+   "metodos": [
+    "DELETE"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\ProfileController",
+    "metodo": "show",
+    "tipo": "controller"
+   },
+   "caminho": "/api/profiles/{username}",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "feed",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/feed",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "create",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "update",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}",
+   "metodos": [
+    "PUT"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "delete",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}",
+   "metodos": [
+    "DELETE"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "list",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\ArticleController",
+    "metodo": "show",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\CommentsController",
+    "metodo": "create",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}/comments",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\CommentsController",
+    "metodo": "delete",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}/comments/{id}",
+   "metodos": [
+    "DELETE"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\CommentsController",
+    "metodo": "list",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}/comments",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\FavoritesController",
+    "metodo": "add",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}/favorite",
+   "metodos": [
+    "POST"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\Articles\\FavoritesController",
+    "metodo": "remove",
+    "tipo": "controller"
+   },
+   "caminho": "/api/articles/{slug}/favorite",
+   "metodos": [
+    "DELETE"
+   ],
+   "middleware": [
+    "api",
+    "auth:api"
+   ]
+  },
+  {
+   "acao": {
+    "classe": "App\\Http\\Controllers\\Api\\TagsController",
+    "metodo": "list",
+    "tipo": "controller"
+   },
+   "caminho": "/api/tags",
+   "metodos": [
+    "GET",
+    "HEAD"
+   ],
+   "middleware": [
+    "api"
+   ]
+  }
+ ],
+ "volateis": {
+  "colunas": [
+   "created_at",
+   "password",
+   "remember_token",
+   "updated_at"
+  ],
+  "resposta": [
+   "createdAt",
+   "token",
+   "updatedAt"
+  ]
+ }
+}

@@ -1,0 +1,553 @@
+{
+  "classes": [
+    {
+      "campos": [
+        {
+          "nome": "EdtNome",
+          "tipo": "TEdit",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "EdtCpf",
+          "tipo": "TEdit",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "BtnSalvar",
+          "tipo": "TButton",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "BtnExcluir",
+          "tipo": "TButton",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "GridClientes",
+          "tipo": "TDBGrid",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "DsClientes",
+          "tipo": "TDataSource",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "FCodigoAtual",
+          "tipo": "Integer",
+          "visibilidade": "private"
+        }
+      ],
+      "herda": [
+        "TForm"
+      ],
+      "metodos": [
+        {
+          "nome": "FormShow",
+          "parametros": [
+            {
+              "modo": null,
+              "nome": "Sender",
+              "tipo": "TObject"
+            }
+          ],
+          "tipo": "procedure",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "BtnSalvarClick",
+          "parametros": [
+            {
+              "modo": null,
+              "nome": "Sender",
+              "tipo": "TObject"
+            }
+          ],
+          "tipo": "procedure",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "BtnExcluirClick",
+          "parametros": [
+            {
+              "modo": null,
+              "nome": "Sender",
+              "tipo": "TObject"
+            }
+          ],
+          "tipo": "procedure",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "CpfValido",
+          "parametros": [
+            {
+              "modo": "const",
+              "nome": "Cpf",
+              "tipo": "string"
+            }
+          ],
+          "retorno": "Boolean",
+          "tipo": "function",
+          "visibilidade": "private"
+        }
+      ],
+      "nome": "TFrmClientes",
+      "propriedades": [
+        {
+          "escreve": "FCodigoAtual",
+          "le": "FCodigoAtual",
+          "nome": "CodigoAtual",
+          "tipo": "Integer",
+          "visibilidade": "public"
+        }
+      ],
+      "unidade": "UClientes"
+    },
+    {
+      "campos": [
+        {
+          "nome": "Conexao",
+          "tipo": "TADOConnection",
+          "visibilidade": "published"
+        },
+        {
+          "nome": "QryClientes",
+          "tipo": "TADOQuery",
+          "visibilidade": "published"
+        }
+      ],
+      "herda": [
+        "TDataModule"
+      ],
+      "metodos": [
+        {
+          "nome": "ProximoCodigo",
+          "parametros": [
+            {
+              "modo": "const",
+              "nome": "Tabela",
+              "tipo": "string"
+            }
+          ],
+          "retorno": "Integer",
+          "tipo": "function",
+          "visibilidade": "public"
+        }
+      ],
+      "nome": "TDmDados",
+      "propriedades": [],
+      "unidade": "UDados"
+    }
+  ],
+  "cobertura": {
+    "arquivos": 5,
+    "componentes": 8,
+    "eventos": 3,
+    "eventos_implementados": 2,
+    "formularios": 2,
+    "operacoes": 3,
+    "pendencias": 3,
+    "sql": 3,
+    "tabelas": 2,
+    "unidades": 3
+  },
+  "formularios": [
+    {
+      "arquivo": "UClientes.dfm",
+      "classe": "TFrmClientes",
+      "componentes": [
+        {
+          "classe": "TEdit",
+          "nome": "EdtNome",
+          "pai": null,
+          "propriedades": {
+            "MaxLength": 60
+          }
+        },
+        {
+          "classe": "TEdit",
+          "nome": "EdtCpf",
+          "pai": null,
+          "propriedades": {
+            "MaxLength": 11
+          }
+        },
+        {
+          "classe": "TButton",
+          "nome": "BtnSalvar",
+          "pai": null,
+          "propriedades": {
+            "Caption": "&Salvar"
+          }
+        },
+        {
+          "classe": "TButton",
+          "nome": "BtnExcluir",
+          "pai": null,
+          "propriedades": {
+            "Caption": "E&xcluir"
+          }
+        },
+        {
+          "classe": "TDBGrid",
+          "nome": "GridClientes",
+          "pai": null,
+          "propriedades": {
+            "Columns": [
+              {
+                "FieldName": "NOME",
+                "Title.Caption": "Nome",
+                "Width": 300
+              },
+              {
+                "FieldName": "CPF",
+                "Width": 120
+              }
+            ],
+            "DataSource": "DsClientes"
+          }
+        },
+        {
+          "classe": "TDataSource",
+          "nome": "DsClientes",
+          "pai": null,
+          "propriedades": {
+            "DataSet": "DmDados.QryClientes"
+          }
+        }
+      ],
+      "eventos": [
+        {
+          "componente": "FrmClientes",
+          "evento": "OnShow",
+          "handler": "FormShow",
+          "implementado": true,
+          "rotina": "TFrmClientes.FormShow"
+        },
+        {
+          "componente": "BtnSalvar",
+          "evento": "OnClick",
+          "handler": "BtnSalvarClick",
+          "implementado": true,
+          "rotina": "TFrmClientes.BtnSalvarClick"
+        },
+        {
+          "componente": "BtnExcluir",
+          "evento": "OnClick",
+          "handler": "BtnExcluirClick",
+          "implementado": false,
+          "rotina": "TFrmClientes.BtnExcluirClick"
+        }
+      ],
+      "nome": "FrmClientes",
+      "propriedades": {
+        "Caption": "Cadastro de Clientes"
+      },
+      "unidade": "UClientes"
+    },
+    {
+      "arquivo": "UDados.dfm",
+      "classe": "TDmDados",
+      "componentes": [
+        {
+          "classe": "TADOConnection",
+          "nome": "Conexao",
+          "pai": null,
+          "propriedades": {
+            "LoginPrompt": false,
+            "Provider": "SQLOLEDB.1"
+          }
+        },
+        {
+          "classe": "TADOQuery",
+          "nome": "QryClientes",
+          "pai": null,
+          "propriedades": {
+            "Connection": "Conexao",
+            "Parameters": [
+              {
+                "DataType": "ftBoolean",
+                "Name": "ATIVO",
+                "Value": true
+              }
+            ],
+            "SQL.Strings": [
+              "SELECT C.CODIGO, C.NOME, C.CPF",
+              "FROM CLIENTES C",
+              "LEFT JOIN CIDADES CI ON CI.ID = C.CIDADE_ID",
+              "WHERE C.ATIVO = :ATIVO",
+              "ORDER BY C.NOME"
+            ]
+          }
+        }
+      ],
+      "eventos": [],
+      "nome": "DmDados",
+      "propriedades": {},
+      "unidade": "UDados"
+    }
+  ],
+  "operacoes": [
+    {
+      "chama": [],
+      "formulario": "FrmClientes",
+      "gatilho": "BtnExcluir.OnClick",
+      "id": "FrmClientes.BtnExcluir.OnClick",
+      "implementado": false,
+      "parametros": [],
+      "rotina": "TFrmClientes.BtnExcluirClick",
+      "sql": [],
+      "tabelas": []
+    },
+    {
+      "chama": [
+        "TDmDados.ProximoCodigo",
+        "TFrmClientes.CpfValido"
+      ],
+      "formulario": "FrmClientes",
+      "gatilho": "BtnSalvar.OnClick",
+      "id": "FrmClientes.BtnSalvar.OnClick",
+      "implementado": true,
+      "parametros": [
+        "CODIGO",
+        "CPF",
+        "NOME"
+      ],
+      "rotina": "TFrmClientes.BtnSalvarClick",
+      "sql": [
+        "UClientes.pas:53",
+        "UDados.pas:55"
+      ],
+      "tabelas": [
+        "CLIENTES"
+      ]
+    },
+    {
+      "chama": [],
+      "formulario": "FrmClientes",
+      "gatilho": "FrmClientes.OnShow",
+      "id": "FrmClientes.FrmClientes.OnShow",
+      "implementado": true,
+      "parametros": [
+        "ATIVO"
+      ],
+      "rotina": "TFrmClientes.FormShow",
+      "sql": [
+        "UDados.dfm:QryClientes.SQL.Strings"
+      ],
+      "tabelas": [
+        "CIDADES",
+        "CLIENTES"
+      ]
+    }
+  ],
+  "origem": {
+    "arquivos": [
+      {
+        "caminho": "Cadastro.dpr",
+        "sha256": "95bb5898636f24dd92df701ce1513837c60b647b2fccd80ab4c586ecd17598a2"
+      },
+      {
+        "caminho": "UClientes.dfm",
+        "sha256": "08f90589ece594f2926dbcc85572595e2f0ed4f7dfbcfb132adec1deab0fb64b"
+      },
+      {
+        "caminho": "UClientes.pas",
+        "sha256": "0910d4d68d662571398209e1b2ad9ebd28a0d3de5660d5806652e9e608b5f640"
+      },
+      {
+        "caminho": "UDados.dfm",
+        "sha256": "2110cca1b45a548d44876b9e79e288d12333c5d65e00d25bf93d7e5ab34e62f2"
+      },
+      {
+        "caminho": "UDados.pas",
+        "sha256": "a8f1792b747b86177c33f88b8675e31d496371987e31849977d7a2acdc5ec9bd"
+      }
+    ],
+    "tipo": "fonte"
+  },
+  "pendencias": [
+    {
+      "detalhe": "TFrmClientes.BtnExcluirClick (declarado na classe, sem corpo)",
+      "onde": "UClientes.dfm:BtnExcluir.OnClick",
+      "tipo": "evento_sem_implementacao"
+    },
+    {
+      "detalhe": "TFrmClientes.BtnExcluirClick",
+      "onde": "UClientes.pas",
+      "tipo": "metodo_sem_corpo"
+    },
+    {
+      "detalhe": "parte do SQL vem de variável; a tabela real só aparece em execução",
+      "onde": "UDados.pas:55",
+      "tipo": "sql_dinamico"
+    }
+  ],
+  "sql": [
+    {
+      "operacao": "INSERT",
+      "origem": "UClientes.pas:53",
+      "parametros": [
+        "CODIGO",
+        "CPF",
+        "NOME"
+      ],
+      "rotina": "TFrmClientes.BtnSalvarClick",
+      "tabelas": [
+        "CLIENTES"
+      ],
+      "texto": "INSERT INTO CLIENTES (CODIGO, NOME, CPF) VALUES (:CODIGO, :NOME, :CPF)"
+    },
+    {
+      "componente": "QryClientes",
+      "operacao": "SELECT",
+      "origem": "UDados.dfm:QryClientes.SQL.Strings",
+      "parametros": [
+        "ATIVO"
+      ],
+      "tabelas": [
+        "CIDADES",
+        "CLIENTES"
+      ],
+      "texto": "SELECT C.CODIGO, C.NOME, C.CPF FROM CLIENTES C LEFT JOIN CIDADES CI ON CI.ID = C.CIDADE_ID WHERE C.ATIVO = :ATIVO ORDER BY C.NOME"
+    },
+    {
+      "dinamico": true,
+      "operacao": "SELECT",
+      "origem": "UDados.pas:55",
+      "parametros": [],
+      "rotina": "TDmDados.ProximoCodigo",
+      "tabelas": [],
+      "texto": "SELECT MAX(CODIGO) AS ULTIMO FROM"
+    }
+  ],
+  "tabelas": {
+    "CIDADES": [
+      "UDados.dfm:QryClientes.SQL.Strings"
+    ],
+    "CLIENTES": [
+      "UClientes.pas:53",
+      "UDados.dfm:QryClientes.SQL.Strings"
+    ]
+  },
+  "unidades": [
+    {
+      "arquivo": "Cadastro.dpr",
+      "campos_lidos": [],
+      "enumeracoes": [],
+      "interfaces": [],
+      "nome": "Cadastro",
+      "registros": [],
+      "rotinas": [],
+      "tipo": "program",
+      "usa": [
+        "Forms",
+        "UClientes",
+        "UDados"
+      ]
+    },
+    {
+      "arquivo": "UClientes.pas",
+      "campos_lidos": [],
+      "enumeracoes": [],
+      "interfaces": [],
+      "nome": "UClientes",
+      "registros": [],
+      "rotinas": [],
+      "tipo": "unit",
+      "usa": [
+        "ADODB",
+        "Classes",
+        "Controls",
+        "DB",
+        "DBGrids",
+        "Forms",
+        "Grids",
+        "StdCtrls",
+        "SysUtils",
+        "UDados",
+        "Windows"
+      ]
+    },
+    {
+      "arquivo": "UDados.pas",
+      "campos_lidos": [
+        "ULTIMO"
+      ],
+      "enumeracoes": [
+        {
+          "nome": "TStatusPedido",
+          "valores": [
+            "spAberto",
+            "spFaturado",
+            "spCancelado"
+          ]
+        }
+      ],
+      "interfaces": [],
+      "nome": "UDados",
+      "registros": [
+        {
+          "campos": [
+            {
+              "nome": "Bruto",
+              "tipo": "Currency"
+            },
+            {
+              "nome": "Desconto",
+              "tipo": "Currency"
+            },
+            {
+              "nome": "Liquido",
+              "tipo": "Currency"
+            }
+          ],
+          "nome": "TTotais"
+        }
+      ],
+      "rotinas": [
+        {
+          "nome": "CalcularDesconto",
+          "parametros": [
+            {
+              "modo": null,
+              "nome": "Valor",
+              "tipo": "Currency"
+            },
+            {
+              "modo": null,
+              "nome": "Percentual",
+              "padrao": "0",
+              "tipo": "Double"
+            }
+          ],
+          "retorno": "Currency",
+          "tipo": "function"
+        },
+        {
+          "diretivas": [
+            "overload"
+          ],
+          "nome": "RegistrarLog",
+          "parametros": [
+            {
+              "modo": "const",
+              "nome": "Msg",
+              "tipo": "string"
+            }
+          ],
+          "tipo": "procedure"
+        }
+      ],
+      "tipo": "unit",
+      "usa": [
+        "ADODB",
+        "Classes",
+        "DB",
+        "SysUtils"
+      ]
+    }
+  ],
+  "versao": 1
+}

@@ -1,0 +1,207 @@
+{
+ "alvo_sha256": "15e81c194df270fbd71450222e71846247926fabfb889e72e7d855903454d752",
+ "metodo": "âncora = texto único da função no fonte; REA list_strings -> xrefs -> resolve_containing_procedure -> procedure_pseudo_code e procedure_callees. chamadas_fonte contadas à mão no fonte da tag; chamadas_rea = procedure_callees (alvos distintos).",
+ "funcoes": [
+  {
+   "funcao": "D_DoomLoop",
+   "fonte": "src/doom/d_main.c:456",
+   "ancora": "WARNING: You are playing using one of the Doom Classic",
+   "procedimento": "0x140027eb0",
+   "pseudo": "pseudo/D_DoomLoop.c.txt",
+   "chamadas_fonte": 13,
+   "chamadas_rea": 15,
+   "textos": "1/1",
+   "constantes": {
+    "bfgedition == 3": true,
+    "ícone 128x128": true,
+    "disco de carga 0x130,0xb8 (EnableLoadingDisk embutida)": true
+   },
+   "ramos": "certos",
+   "veredito": "bate",
+   "nota": "as 13 chamadas aparecem em ordem; EnableLoadingDisk foi embutida (+M_CheckParm \"-cdrom\", DEH_String STCDROM/STDISK); printf virou puts. Nenhum nome recuperado."
+  },
+  {
+   "funcao": "G_DoSaveGame",
+   "fonte": "src/doom/g_game.c:1692",
+   "ancora": "Savegame buffer overrun",
+   "procedimento": "0x14002d590",
+   "pseudo": "pseudo/G_DoSaveGame.c.txt",
+   "chamadas_fonte": 18,
+   "chamadas_rea": 18,
+   "textos": "5/5",
+   "constantes": {
+    "SAVEGAMESIZE 0x2c000 (180224)": true,
+    "\"recovery.dsg\"": true,
+    "\"wb\"": true
+   },
+   "ramos": "certos",
+   "veredito": "bate",
+   "nota": "o compilador duplicou o bloco de gravação nos dois caminhos (arquivo normal x recuperação); o pseudo-código mostra os dois, equivalentes ao fonte."
+  },
+  {
+   "funcao": "P_WriteSaveGameHeader",
+   "fonte": "src/doom/p_saveg.c:1344",
+   "ancora": "version %i (1a de 2 referências)",
+   "procedimento": "0x14003c8f0",
+   "pseudo": "pseudo/SaveHeader_a.c.txt",
+   "chamadas_fonte": 4,
+   "chamadas_rea": 3,
+   "textos": "1/1",
+   "constantes": {
+    "SAVESTRINGSIZE 24 (0x18)": true,
+    "VERSIONSIZE 16 (0x10)": true,
+    "MAXPLAYERS 4 (laço de 16 bytes de int)": true,
+    "leveltime em 3 bytes": true
+   },
+   "ramos": "certos",
+   "veredito": "bate",
+   "nota": "memset(name,0,16) virou atribuição de 16 bytes zerados; daí 3 chamadas em vez de 4."
+  },
+  {
+   "funcao": "P_ReadSaveGameHeader",
+   "fonte": "src/doom/p_saveg.c:1376",
+   "ancora": "version %i (2a de 2 referências)",
+   "procedimento": "0x14003ca00",
+   "pseudo": "pseudo/SaveHeader_b.c.txt",
+   "chamadas_fonte": 5,
+   "chamadas_rea": 4,
+   "textos": "1/1",
+   "constantes": {
+    "24 bytes pulados": true,
+    "16 bytes de versão": true,
+    "leveltime = a*0x10000+b*0x100+c": true
+   },
+   "ramos": "certos",
+   "veredito": "bate",
+   "nota": "return 0 na versão errada e return 1 no fim, como o fonte; memset embutido."
+  },
+  {
+   "funcao": "G_VanillaVersionCode",
+   "fonte": "src/doom/g_game.c:2118",
+   "ancora": "chamada pelas duas acima",
+   "procedimento": "0x14002dd40",
+   "pseudo": "pseudo/G_VanillaVersionCode.c.txt",
+   "chamadas_fonte": 0,
+   "chamadas_rea": 0,
+   "textos": "0/0",
+   "constantes": {
+    "106/107/108 = gameversion+0x68 para 2..4": true,
+    "109 (0x6d) no resto": true
+   },
+   "ramos": "certos",
+   "veredito": "bate",
+   "nota": "o switch do fonte virou aritmética; o pseudo-código é equivalente, mas não parece com o fonte."
+  },
+  {
+   "funcao": "W_AddFile",
+   "fonte": "src/w_wad.c:103",
+   "ancora": "Wad file %s doesn't have IWAD or PWAD id",
+   "procedimento": "0x140023170",
+   "pseudo": "pseudo/W_AddFile.c.txt",
+   "chamadas_fonte": 15,
+   "chamadas_rea": 15,
+   "textos": "8/8",
+   "constantes": {
+    "cabeçalho 12 bytes": true,
+    "\"IWAD\"/\"PWAD\" 4 bytes": true,
+    "limite 4046 (0xfce)": true,
+    "entrada de 16 bytes": true,
+    "nome de 8 bytes": true,
+    "offset do diretório (cabeçalho+8)": false
+   },
+   "ramos": "certos",
+   "veredito": "parcial",
+   "nota": "W_Read é chamada por ponteiro (file_class->Read) e o Ghidra perdeu os argumentos no pseudo-código: o offset do diretório só aparece no assembly (0x140023260, MOV EDX,[RSP+0x2c]), também devolvido pelo REA."
+  },
+  {
+   "funcao": "W_ReadLump",
+   "fonte": "src/w_wad.c:346",
+   "ancora": "W_ReadLump: only read %i of %i on lump %i",
+   "procedimento": "0x1400235d0",
+   "pseudo": "pseudo/W_ReadLump.c.txt",
+   "chamadas_fonte": 3,
+   "chamadas_rea": 3,
+   "textos": "2/2",
+   "constantes": {},
+   "ramos": "errados",
+   "veredito": "parcial",
+   "nota": "`if (size <= lidos) { }` vazio seguido de I_Error: lido ao pé da letra, a função sempre aborta. Os argumentos de W_Read também sumiram."
+  },
+  {
+   "funcao": "W_GetNumForName",
+   "fonte": "src/w_wad.c:310",
+   "ancora": "W_GetNumForName: %s not found!",
+   "procedimento": "0x140023560 (+2 cópias embutidas)",
+   "pseudo": "pseudo/W_GetNumForName_ctx1.c.txt",
+   "chamadas_fonte": 2,
+   "chamadas_rea": 2,
+   "textos": "1/1",
+   "constantes": {},
+   "ramos": "errados",
+   "veredito": "parcial",
+   "nota": "mesmo defeito: `if (-1 < i) { }` vazio e o retorno some. A mensagem aparece em 3 procedimentos porque o -O2 embutiu a função em W_CacheLumpName e W_ReleaseLumpName."
+  },
+  {
+   "funcao": "G_DoLoadGame",
+   "fonte": "src/doom/g_game.c:1630",
+   "ancora": "Bad savegame",
+   "procedimento": "0x14002dad0",
+   "pseudo": "pseudo/G_DoLoadGame.c.txt",
+   "chamadas_fonte": 12,
+   "chamadas_rea": 12,
+   "textos": "2/2",
+   "constantes": {
+    "\"rb\"": true
+   },
+   "ramos": "errados",
+   "veredito": "parcial",
+   "nota": "as 12 chamadas batem, mas o `return` depois de fclose (cabeçalho inválido) sumiu, e o fim (`if (setsizeneeded) R_ExecuteSetViewSize(); R_FillBackScreen();`) saiu com a condição invertida e uma chamada a mais."
+  },
+  {
+   "funcao": "TryRunTics",
+   "fonte": "src/d_loop.c:676",
+   "ancora": "TryRunTics: lowtic < gametic",
+   "procedimento": "0x140006f30",
+   "pseudo": "pseudo/TryRunTics.c.txt",
+   "chamadas_fonte": 12,
+   "chamadas_rea": 5,
+   "textos": "2/2",
+   "constantes": {
+    "BACKUPTICS 128 (% 0x80)": true
+   },
+   "ramos": "certos na estrutura",
+   "veredito": "parcial",
+   "nota": "GetLowTic, PlayersInGame, SinglePlayerClear e TicdupSquash foram embutidas: 233 linhas de código corrido e 5 chamadas, contra 12 no fonte. Dá para seguir, não dá para comparar linha a linha."
+  },
+  {
+   "funcao": "M_LoadDefaults",
+   "fonte": "src/m_config.c:2428",
+   "ancora": "-extraconfig",
+   "procedimento": "0x1400160e0",
+   "pseudo": "pseudo/M_LoadDefaults.c.txt",
+   "chamadas_fonte": 5,
+   "chamadas_rea": 6,
+   "textos": "5/5",
+   "constantes": {
+    "assert de m_config.c linhas 0x9ef/0x9d7/0x9e4": true
+   },
+   "ramos": "certos até o fim da função",
+   "veredito": "parcial",
+   "nota": "o Ghidra não tratou _assert como sem-retorno e grudou 3 funções vizinhas (M_Bind*Variable) no fim do procedimento."
+  },
+  {
+   "funcao": "G_Ticker",
+   "fonte": "src/doom/g_game.c:910",
+   "ancora": "%s is turbo!",
+   "procedimento": null,
+   "pseudo": "pseudo/G_Ticker_parcial.c.txt",
+   "chamadas_fonte": null,
+   "chamadas_rea": null,
+   "textos": "-",
+   "constantes": {},
+   "ramos": "-",
+   "veredito": "não achou",
+   "nota": "o texto é referenciado em 0x14002ead6, mas nenhum procedimento contém esse endereço (not_in_procedure): o Ghidra não criou a função. O procedimento vizinho (0x14002e570) é G_WriteDemoTiccmd."
+  }
+ ]
+}

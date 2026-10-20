@@ -1,0 +1,64 @@
+{
+  "_leia": "Recorte da descrição da máquina de onde estes casos saíram: só o papel `reverso` (o que ele exige, as ferramentas fixadas e como se prova). Os testes de versão do REA leem este arquivo.",
+  "ligacoes": {
+    "reverso": "local"
+  },
+  "papeis": {
+    "reverso": {
+      "estado": [
+        {
+          "caminho": "pasta de evidencia do trabalho (rea-evidencia.json com sha256 de cada saida)",
+          "essencial": false,
+          "oque": "descartavel: refaz-se rodando de novo sobre o mesmo alvo"
+        }
+      ],
+      "exige": {
+        "agendador": false,
+        "binarios": [
+          "npx",
+          "java (Ghidra 11+, so quando nao ha fonte e o alvo e o executavel)"
+        ],
+        "docker": false,
+        "gpu": false,
+        "software": [
+          "python3 >= 3.12 (extrator Delphi -> contrato, so stdlib)",
+          "node >= 22.19.0 (exigencia do rea-agents 6.7.0)"
+        ]
+      },
+      "ferramentas": [
+        {
+          "nome": "delphi-contrato",
+          "onde": "apps/delphi-contrato",
+          "oque": "fonte Delphi (.pas/.dpr/.dfm texto ou TPF0) -> contrato JSON determinístico + avaliador `verificar`"
+        },
+        {
+          "licenca": "MIT",
+          "nome": "rea",
+          "oque": "MCP/CLI de engenharia reversa (binario nativo via Ghidra/IDA/Hopper, JS/Electron, .NET); usado so quando nao ha fonte",
+          "origem": "https://github.com/morluto/rea",
+          "pacote": "rea-agents@6.7.0",
+          "porque_fixado": "versao fixa: o mesmo executavel tem que dar a mesma evidencia; atualizar e um diff revisado, nunca @latest"
+        }
+      ],
+      "inversa": {
+        "comando": "apagar a pasta de evidencia do trabalho e `npm cache clean --force` (npx nao instala nada global)",
+        "deixa_de_pe": [
+          "o contrato JSON gerado, que e o entregavel",
+          "o fonte do cliente, que nunca e alterado (so leitura)"
+        ]
+      },
+      "oque": "Engenharia reversa de sistema legado: transforma fonte ou executavel em contrato verificavel. Primeiro papel que nasce sem servico, sem estado e sem host: so trabalho por demanda. Pedido de origem: professor universitario, sistema Delphi -> contrato novo (2026-10-19).",
+      "prova": [
+        "python3 -m delphi_contrato verificar tests/fixtures/cadastro.contrato.json tests/fixtures/cadastro (em apps/delphi-contrato) sai 0",
+        "npx -y rea-agents@6.7.0 --version devolve 6.7.0"
+      ],
+      "segredos": [],
+      "servicos": []
+    }
+  },
+  "substratos": {
+    "local": {
+      "tipo": "qualquer máquina com python3 >= 3.12 e, para o REA, node >= 22.19 e Java"
+    }
+  }
+}

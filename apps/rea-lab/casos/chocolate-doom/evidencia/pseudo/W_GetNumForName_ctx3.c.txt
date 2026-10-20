@@ -1,0 +1,24 @@
+
+void FUN_1400237a0(char *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)
+
+{
+  longlong lVar1;
+  uint uVar2;
+  
+  uVar2 = FUN_140023440(param_1);
+  if ((int)uVar2 < 0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_140002a20("W_GetNumForName: %s not found!",param_1,param_3,param_4);
+  }
+  if (uVar2 < DAT_140146e30) {
+    lVar1 = *(longlong *)(DAT_140146e38 + (longlong)(int)uVar2 * 8);
+    if (*(longlong *)(*(longlong *)(lVar1 + 8) + 8) != 0) {
+      return;
+    }
+    FUN_1400259d0(*(longlong *)(lVar1 + 0x18),8,"w_wad.c",0x1cf);
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_140002a20("W_ReleaseLumpNum: %i >= numlumps",(ulonglong)uVar2,param_3,param_4);
+}
+

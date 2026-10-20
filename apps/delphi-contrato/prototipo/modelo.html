@@ -1,0 +1,400 @@
+<title>Delphi em Contrato</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: uma coluna de leitura (tese, como funciona, piloto) com o protótipo largo no meio:
+   à esquerda a tela antiga como no designer do Delphi, à direita o contrato. */
+:root {
+  --papel: #f3f5f8;
+  --superficie: #ffffff;
+  --tinta: #18202d;
+  --tinta-2: #4a5568;
+  --linha: #d6dce6;
+  --anil: #2140a8;
+  --anil-suave: #e4e9fa;
+  --ambar: #9a5b00;
+  --ambar-suave: #fdf0d9;
+  --verde: #1d6b45;
+  --verde-suave: #def3e8;
+  --grade: #c5ccd8;
+  --form-fundo: #e9ecf1;
+  --form-barra: #2140a8;
+  --form-barra-texto: #ffffff;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --texto: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #10141c; --superficie: #171d28; --tinta: #e3e8f1; --tinta-2: #a3aec0; --linha: #2c3546;
+    --anil: #93a9ff; --anil-suave: #1f2a4a; --ambar: #f2b55c; --ambar-suave: #3a2c14; --verde: #7bd3a4;
+    --verde-suave: #16332a; --grade: #2a3343; --form-fundo: #1c2330; --form-barra: #2b4396; --form-barra-texto: #ffffff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #10141c; --superficie: #171d28; --tinta: #e3e8f1; --tinta-2: #a3aec0; --linha: #2c3546;
+  --anil: #93a9ff; --anil-suave: #1f2a4a; --ambar: #f2b55c; --ambar-suave: #3a2c14; --verde: #7bd3a4;
+  --verde-suave: #16332a; --grade: #2a3343; --form-fundo: #1c2330; --form-barra: #2b4396; --form-barra-texto: #ffffff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--papel); color: var(--tinta); font: 400 17px/1.55 var(--texto);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.leitura { max-width: 68ch; margin-inline: auto; }
+.largo { max-width: 1180px; margin-inline: auto; }
+section { padding-block: 40px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+p { margin: 0; }
+.rotulo { font: 600 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tinta-2); }
+.pilha { display: grid; gap: 14px; }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+a { color: var(--anil); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--anil); outline-offset: 2px; }
+
+/* abertura */
+.abertura { padding-block: 56px 28px; }
+.fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; font: 600 14px/1.2 var(--mono); }
+.fluxo span { padding: 8px 12px; border: 1px solid var(--linha); border-radius: 4px; background: var(--superficie); }
+.fluxo span.meio { border-color: var(--anil); color: var(--anil); background: var(--anil-suave); }
+.fluxo i { font-style: normal; color: var(--tinta-2); }
+
+/* protótipo */
+.prototipo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 18px; margin-top: 20px; }
+@media (max-width: 900px) { .prototipo { grid-template-columns: minmax(0, 1fr); } }
+.painel { background: var(--superficie); border: 1px solid var(--linha); border-radius: 6px; min-width: 0; display: flex; flex-direction: column; }
+.painel > header { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--linha); }
+.abas { display: flex; flex-wrap: wrap; gap: 4px; }
+.aba { border: 1px solid transparent; background: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font: 600 13px/1.2 var(--mono); color: var(--tinta-2); }
+.aba[aria-selected="true"] { border-color: var(--anil); color: var(--anil); background: var(--anil-suave); }
+.designer { padding: 16px; background-color: var(--superficie);
+  background-image: radial-gradient(var(--grade) 1px, transparent 1.2px); background-size: 8px 8px; }
+.janela { max-width: 480px; margin-inline: auto; border: 1px solid var(--linha); border-radius: 4px; overflow: hidden; background: var(--form-fundo); }
+.janela .barra { background: var(--form-barra); color: var(--form-barra-texto); font: 600 13px/1 var(--texto); padding: 7px 10px; }
+.janela .area { position: relative; width: 100%; }
+.ctl { position: absolute; font: 400 clamp(9px, 2.6vw, 12px)/1.2 var(--texto); display: flex; align-items: center; overflow: hidden; }
+.ctl.edit { background: var(--superficie); border: 1px solid var(--linha); padding: 0 6px; color: var(--tinta-2); }
+.ctl.botao { justify-content: center; border: 1px solid var(--tinta-2); border-radius: 3px; background: var(--superficie); cursor: pointer; font-weight: 600; }
+.ctl.botao:hover { border-color: var(--anil); color: var(--anil); }
+.ctl.botao.ativo { outline: 2px solid var(--anil); outline-offset: 1px; }
+.ctl.botao.falta { border-style: dashed; }
+.ctl.grade { background: var(--superficie); border: 1px solid var(--linha); flex-direction: column; align-items: stretch; }
+.ctl.grade .cab { display: flex; background: var(--anil-suave); font-weight: 600; border-bottom: 1px solid var(--linha); }
+.ctl.grade .cab span { padding: 3px 6px; border-right: 1px solid var(--linha); overflow: hidden; white-space: nowrap; }
+.naovisuais { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 8px; border-top: 1px solid var(--linha); font: 400 11px/1.4 var(--mono); color: var(--tinta-2); }
+.naovisuais span { border: 1px dashed var(--tinta-2); border-radius: 3px; padding: 1px 6px; }
+.dica { padding: 10px 16px 14px; color: var(--tinta-2); font-size: 14px; }
+.fonte { border-top: 1px solid var(--linha); min-width: 0; }
+.fonte pre { margin: 0; max-height: 330px; overflow: auto; font: 400 12.5px/1.6 var(--mono); padding: 8px 0; }
+.fonte .ln { display: block; padding: 0 12px 0 0; white-space: pre; }
+.fonte .ln::before { content: attr(data-n); display: inline-block; width: 3.4em; padding-right: 10px; text-align: right; color: var(--tinta-2); opacity: 0.6; }
+.fonte .ln.marca { background: var(--anil-suave); }
+.conteudo { padding: 14px; min-width: 0; display: grid; gap: 12px; align-content: start; }
+.trilha { display: grid; gap: 0; }
+.passo > div { min-width: 0; overflow-wrap: anywhere; }
+.passo { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--linha); }
+.passo:last-child { border-bottom: 0; }
+.passo .rotulo { padding-top: 3px; }
+.ref { border: 0; background: none; padding: 0; cursor: pointer; color: var(--anil); text-decoration: underline; text-underline-offset: 2px; font: 400 12.5px/1.4 var(--mono); }
+.chip { display: inline-block; padding: 2px 8px; border-radius: 999px; font: 600 12px/1.5 var(--mono); }
+.chip.ok { background: var(--verde-suave); color: var(--verde); }
+.chip.falta { background: var(--ambar-suave); color: var(--ambar); }
+.chip.neutro { background: var(--anil-suave); color: var(--anil); }
+.sqltexto { font: 400 12.5px/1.5 var(--mono); background: var(--papel); border: 1px solid var(--linha); border-radius: 4px; padding: 8px 10px; white-space: pre-wrap; word-break: break-word; }
+.lista-ops { display: flex; flex-wrap: wrap; gap: 6px; }
+.op { border: 1px solid var(--linha); background: var(--superficie); border-radius: 4px; padding: 5px 9px; cursor: pointer; font: 600 12.5px/1.3 var(--mono); }
+.op[aria-pressed="true"] { border-color: var(--anil); color: var(--anil); background: var(--anil-suave); }
+.tabela { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+th { font: 600 12px/1.3 var(--mono); color: var(--tinta-2); text-transform: uppercase; letter-spacing: 0.05em; }
+td { font-variant-numeric: tabular-nums; }
+.pend { border-left: 3px solid var(--ambar); padding: 6px 10px; background: var(--ambar-suave); border-radius: 0 4px 4px 0; display: grid; gap: 2px; }
+textarea { width: 100%; min-height: 260px; font: 400 12px/1.5 var(--mono); background: var(--papel); color: var(--tinta); border: 1px solid var(--linha); border-radius: 4px; padding: 8px; resize: vertical; }
+.acao { border: 1px solid var(--anil); background: var(--anil); color: var(--superficie); border-radius: 4px; padding: 7px 14px; cursor: pointer; font-weight: 600; }
+.acao.sec { background: none; color: var(--anil); }
+.veredito { padding: 8px 10px; border-radius: 4px; font: 600 13px/1.5 var(--mono); }
+.veredito.ok { background: var(--verde-suave); color: var(--verde); }
+.veredito.ruim { background: var(--ambar-suave); color: var(--ambar); }
+.numeros { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 600 13px/1.4 var(--mono); color: var(--tinta-2); }
+.numeros b { color: var(--tinta); }
+
+/* como funciona */
+.etapas { display: grid; gap: 0; counter-reset: etapa; }
+.etapa { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--linha); }
+.etapa::before { counter-increment: etapa; content: counter(etapa); font: 700 1.3rem/1 var(--display); color: var(--anil); padding-top: 2px; }
+.etapa .cab { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+.duas ul { margin: 8px 0 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.rodape { padding-block: 28px 48px; color: var(--tinta-2); font-size: 14px; border-top: 1px solid var(--linha); }
+@media (prefers-reduced-motion: no-preference) { .ln.marca { transition: background 0.3s; } }
+</style>
+
+<div class="leitura abertura pilha">
+  <p class="rotulo">Conceito e protótipo · 2026-10-19</p>
+  <h1>O sistema Delphi vira um contrato que o sistema novo tem de cumprir.</h1>
+  <p>Migrar um sistema Delphi costuma falhar no mesmo ponto: ninguém sabe ao certo tudo o que ele faz. As regras estão espalhadas em telas, eventos de botão e SQL escrito dentro do código. A proposta é ler o sistema antigo e produzir, de forma automática e repetível, a lista do que ele promete ao usuário e ao banco de dados. Essa lista é o contrato. O sistema novo, em qualquer linguagem, é aceito quando cumpre o contrato.</p>
+  <div class="fluxo" aria-label="fluxo">
+    <span>Fonte Delphi (.pas, .dfm)</span><i>→</i><span class="meio">Contrato verificável</span><i>→</i><span>Sistema novo + testes de aceite</span>
+  </div>
+</div>
+
+<section class="largo" aria-labelledby="t-prot">
+  <div class="leitura pilha" style="margin-inline:0;max-width:72ch">
+    <p class="rotulo">Protótipo</p>
+    <h2 id="t-prot">Clique num botão da tela antiga e veja o que ele promete</h2>
+    <p>Abaixo está um cadastro de clientes em Delphi, de exemplo, e o contrato que a ferramenta gerou dele. Tudo à direita saiu da ferramenta, sem edição: cada item aponta para o arquivo e a linha de origem.</p>
+    <div class="numeros" id="numeros"></div>
+  </div>
+  <div class="prototipo">
+    <div class="painel">
+      <header><span class="rotulo">Tela antiga · UClientes.dfm</span><span class="rotulo" id="arq-atual"></span></header>
+      <div class="designer"><div class="janela" id="janela"></div></div>
+      <p class="dica">Botões e a própria janela têm eventos. Clique em <b>Salvar</b>, em <b>Excluir</b> ou na barra da janela.</p>
+      <div class="fonte">
+        <header style="padding:8px 12px;border-bottom:1px solid var(--linha)"><div class="abas" id="abas-fonte" role="tablist" aria-label="Arquivos do projeto"></div></header>
+        <pre id="fonte" tabindex="0" aria-label="Código-fonte"></pre>
+      </div>
+    </div>
+    <div class="painel">
+      <header>
+        <span class="rotulo">Contrato gerado</span>
+        <div class="abas" id="abas-contrato" role="tablist" aria-label="Seções do contrato"></div>
+      </header>
+      <div class="conteudo" id="conteudo"></div>
+    </div>
+  </div>
+</section>
+
+<section class="leitura" aria-labelledby="t-como">
+  <div class="pilha">
+    <p class="rotulo">Como funciona</p>
+    <h2 id="t-como">Quatro etapas, cada uma com uma prova</h2>
+  </div>
+  <div class="etapas" style="margin-top:12px">
+    <div class="etapa"><div class="pilha" style="gap:6px"><div class="cab"><h3>Extrair o contrato</h3><span class="chip ok">pronto</span></div><p>A ferramenta lê units, formulários (em texto ou no formato binário do Delphi) e o SQL dentro do código. Mesma entrada, mesmo arquivo de saída, byte a byte, sem data nem caminho de máquina.</p></div></div>
+    <div class="etapa"><div class="pilha" style="gap:6px"><div class="cab"><h3>Fechar as pendências com quem conhece o sistema</h3><span class="chip ok">pronto</span></div><p>O que a leitura não consegue afirmar vira pendência explícita: botão ligado a uma rotina sem código, SQL montado com variável, tela sem unit. Nada fica escondido; a conversa com o cliente parte dessa lista.</p></div></div>
+    <div class="etapa"><div class="pilha" style="gap:6px"><div class="cab"><h3>Conferir que o contrato ainda é o do sistema</h3><span class="chip ok">pronto</span></div><p>O verificador refaz a leitura e compara seção por seção. Se alguém editou o contrato à mão ou o código mudou depois, ele aponta onde. Experimente na aba <b>Verificar</b> do protótipo.</p></div></div>
+    <div class="etapa"><div class="pilha" style="gap:6px"><div class="cab"><h3>Gerar os testes de aceite do sistema novo</h3><span class="chip falta">próximo passo</span></div><p>Cada operação do contrato vira um teste: dado o clique em Salvar com estes campos, o banco recebe este INSERT nesta tabela. O sistema novo é entregue quando passa em todos.</p></div></div>
+  </div>
+</section>
+
+<section class="leitura duas" aria-label="O que já existe e o que falta">
+  <div>
+    <h3>O que já está de pé</h3>
+    <ul>
+      <li>Leitura de Object Pascal: classes, métodos, propriedades, regras com assinatura, registros e enumerações.</li>
+      <li>Formulários <code>.dfm</code> em texto e binário, com componentes, ligações de dados e eventos.</li>
+      <li>SQL dentro do código e dos componentes, com tabelas e parâmetros.</li>
+      <li>Cada clique ligado ao SQL que ele alcança, inclusive por rotinas chamadas e consultas abertas.</li>
+      <li>Sem o código-fonte, direto do executável (<code>.exe</code>, <code>.dll</code>): telas, componentes, eventos e SQL, sem rodar o programa.</li>
+      <li>Para ir além das telas no executável: engenharia reversa com o REA (código aberto, licença MIT), em versão fixa.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Limites conhecidos</h3>
+    <ul>
+      <li>Diretivas de compilação (<code>{$IFDEF}</code>) não são avaliadas: os dois ramos entram no contrato.</li>
+      <li>Chamadas entre rotinas são achadas pelo nome; o contrato mostra a lista para conferência.</li>
+      <li>SQL montado em tempo de execução vira pendência: a tabela real só aparece rodando o sistema.</li>
+      <li>Do executável sai tudo da tela, mas não o código de cada botão: ligar o clique ao SQL exige o fonte ou o REA.</li>
+      <li>Testado num projeto de exemplo e num executável montado a partir dele; o primeiro sistema real vai medir a cobertura de verdade.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="leitura pilha" aria-labelledby="t-piloto">
+  <p class="rotulo">Piloto com um cliente</p>
+  <h2 id="t-piloto">Do que precisamos para rodar no primeiro sistema real</h2>
+  <div class="duas">
+    <div><h3>O cliente entrega</h3><ul><li>O código-fonte de um módulo (as pastas com <code>.pas</code>, <code>.dfm</code> e <code>.dpr</code>) ou, se o fonte se perdeu, só o executável.</li><li>Se possível, o esquema do banco (para cruzar tabelas e colunas).</li><li>Uma pessoa que conheça o sistema para fechar as pendências.</li></ul></div>
+    <div><h3>O cliente recebe</h3><ul><li>O contrato do módulo, em JSON e em relatório legível.</li><li>A lista de pendências, com arquivo e linha de cada uma.</li><li>Números medidos: telas, eventos, operações, tabelas e quanto está coberto.</li><li>A base para os testes de aceite do sistema novo.</li></ul></div>
+  </div>
+  <p>O código do cliente é só lido, nunca alterado, e o processamento roda em ambiente nosso e isolado.</p>
+</section>
+
+<footer class="leitura rodape">Gerado por <code>apps/delphi-contrato/prototipo/montar.py</code> a partir do contrato do projeto de exemplo. Nenhum número desta página foi digitado à mão.</footer>
+
+<script>
+const DADOS = /*__DADOS__*/null;
+const C = DADOS.contrato;
+const ARQS = DADOS.arquivos;
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---- números
+const cob = C.cobertura;
+$("#numeros").innerHTML = [
+  ["arquivos", cob.arquivos], ["telas", cob.formularios], ["componentes", cob.componentes], ["eventos", cob.eventos],
+  ["operações", cob.operacoes], ["SQL", cob.sql], ["tabelas", cob.tabelas], ["pendências", cob.pendencias],
+].map(([k, v]) => `<span><b>${v}</b> ${k}</span>`).join("");
+
+// ---- fonte
+const nomes = Object.keys(ARQS);
+let arquivoAtual = null;
+function mostrarArquivo(nome, linhas = []) {
+  arquivoAtual = nome;
+  const marca = new Set(linhas);
+  $("#fonte").innerHTML = ARQS[nome].replace(/\n$/, "").split("\n")
+    .map((l, i) => `<span class="ln${marca.has(i + 1) ? " marca" : ""}" data-n="${i + 1}">${esc(l) || " "}</span>`).join("");
+  $("#arq-atual").textContent = "";
+  document.querySelectorAll("#abas-fonte .aba").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.arq === nome)));
+  const alvo = $("#fonte .marca");
+  if (alvo) $("#fonte").scrollTop = alvo.offsetTop - 60;
+}
+$("#abas-fonte").innerHTML = nomes.map((n) => `<button class="aba" role="tab" data-arq="${esc(n)}">${esc(n)}</button>`).join("");
+$("#abas-fonte").addEventListener("click", (e) => { const b = e.target.closest(".aba"); if (b) mostrarArquivo(b.dataset.arq); });
+
+// Origem "UClientes.pas:53" -> linha 53; "UDados.dfm:QryClientes.SQL.Strings" -> a linha do object;
+// rotina "TFrmClientes.BtnSalvarClick" -> a linha da implementação. Só navegação: o contrato não muda.
+function irPara(ref) {
+  const [arq, resto] = ref.split(/:(.*)/s);
+  if (!(arq in ARQS)) return;
+  const linhas = ARQS[arq].split("\n");
+  let n = parseInt(resto, 10);
+  if (isNaN(n)) {
+    const comp = resto.split(".")[0];
+    n = linhas.findIndex((l) => new RegExp(`object\\s+${comp}\\b`).test(l)) + 1;
+  }
+  mostrarArquivo(arq, n ? [n] : []);
+}
+function irParaRotina(rotina) {
+  for (const arq of nomes) {
+    const i = ARQS[arq].split("\n").findIndex((l) => new RegExp(`^\\s*(procedure|function)\\s+${rotina.replace(".", "\\.")}\\b`, "i").test(l));
+    if (i >= 0) return mostrarArquivo(arq, [i + 1]);
+  }
+  const dono = C.unidades.find((u) => C.classes.some((c) => c.unidade === u.nome && rotina.startsWith(c.nome + ".")));
+  if (dono) {
+    const i = ARQS[dono.arquivo].split("\n").findIndex((l) => l.includes(rotina.split(".")[1]));
+    mostrarArquivo(dono.arquivo, i >= 0 ? [i + 1] : []);
+  }
+}
+const ref = (r) => `<button class="ref" data-ref="${esc(r)}">${esc(r)}</button>`;
+const refRotina = (r) => `<button class="ref" data-rotina="${esc(r)}">${esc(r)}</button>`;
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".ref");
+  if (!b) return;
+  if (b.dataset.ref) irPara(b.dataset.ref); else irParaRotina(b.dataset.rotina);
+});
+
+// ---- tela antiga, desenhada a partir do .dfm original (geometria só para o desenho)
+function lerDfm(texto) {
+  // Pilha de blocos: "object" e "item" abrem, "end"/"end>" fecham. Propriedade só conta no object do topo.
+  const raiz = { filhos: [], props: {} }, pilha = [{ tipo: "obj", no: raiz }];
+  for (const l of texto.split("\n")) {
+    const m = l.match(/^\s*object\s+(\w+)\s*:\s*(\w+)/);
+    const topo = pilha[pilha.length - 1];
+    if (m) { const no = { nome: m[1], classe: m[2], props: {}, filhos: [] }; topo.no.filhos.push(no); pilha.push({ tipo: "obj", no }); continue; }
+    if (/^\s*item\s*$/.test(l)) { pilha.push({ tipo: "item", no: topo.no }); continue; }
+    if (/^\s*end>?\s*$/.test(l)) { pilha.pop(); continue; }
+    const p = l.match(/^\s*([\w.]+)\s*=\s*(.+)$/);
+    if (p && topo.tipo === "obj") topo.no.props[p[1]] = p[2].replace(/^'(.*)'$/, "$1");
+  }
+  return raiz.filhos[0];
+}
+const form = lerDfm(ARQS["UClientes.dfm"]);
+const opPorComp = {};
+C.operacoes.forEach((o) => { opPorComp[o.gatilho.split(".")[0]] = o.id; });
+function desenharJanela() {
+  const L = +form.props.ClientWidth || 480, A = +form.props.ClientHeight || 320;
+  let h = `<div class="barra ctl-form" role="button" tabindex="0" data-op="${esc(opPorComp[form.nome] || "")}">${esc(form.props.Caption || form.nome)}</div><div class="area" style="aspect-ratio:${L}/${A}">`;
+  const naoVisuais = [];
+  for (const c of form.filhos) {
+    const x = +c.props.Left || 0, y = +c.props.Top || 0, w = +c.props.Width || 80, a = +c.props.Height || 25;
+    const pos = `left:${(x / L) * 100}%;top:${(y / A) * 100}%;width:${(w / L) * 100}%;height:${(a / A) * 100}%`;
+    if (c.classe === "TButton") {
+      const op = C.operacoes.find((o) => o.id === opPorComp[c.nome]);
+      h += `<button class="ctl botao${op && !op.implementado ? " falta" : ""}" data-op="${esc(opPorComp[c.nome] || "")}" style="${pos}">${esc((c.props.Caption || c.nome).replace("&", ""))}</button>`;
+    } else if (c.classe === "TEdit") {
+      h += `<div class="ctl edit" style="${pos}">${esc(c.nome)}</div>`;
+    } else if (c.classe === "TDBGrid") {
+      const comp = C.formularios.flatMap((f) => f.componentes).find((k) => k.nome === c.nome);
+      const cols = (comp && comp.propriedades && comp.propriedades.Columns) || [];
+      h += `<div class="ctl grade" style="${pos}"><div class="cab">${cols.map((k) => `<span style="flex:${k.Width || 100}">${esc(k["Title.Caption"] || k.FieldName)}</span>`).join("")}</div></div>`;
+    } else {
+      naoVisuais.push(c);
+    }
+  }
+  // Componente sem posição na tela (DataSource, Query): o designer do Delphi também os mostra à parte.
+  const faixa = naoVisuais.length ? `<div class="naovisuais">${naoVisuais.map((c) => `<span>${esc(c.nome)}: ${esc(c.classe)}</span>`).join("")}</div>` : "";
+  $("#janela").innerHTML = h + "</div>" + faixa;
+}
+desenharJanela();
+$("#janela").addEventListener("click", (e) => { const b = e.target.closest("[data-op]"); if (b && b.dataset.op) selecionarOp(b.dataset.op); });
+$("#janela").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.dataset.op) selecionarOp(e.target.dataset.op); });
+
+// ---- contrato
+const ABAS = [["ops", "Operações"], ["telas", "Telas"], ["sql", "SQL"], ["pend", `Pendências (${C.pendencias.length})`], ["verificar", "Verificar"]];
+let abaAtual = "ops", opAtual = C.operacoes.find((o) => o.gatilho.startsWith("BtnSalvar")).id;
+$("#abas-contrato").innerHTML = ABAS.map(([k, t]) => `<button class="aba" role="tab" data-aba="${k}">${t}</button>`).join("");
+$("#abas-contrato").addEventListener("click", (e) => { const b = e.target.closest(".aba"); if (b) { abaAtual = b.dataset.aba; render(); } });
+
+function selecionarOp(id) { opAtual = id; abaAtual = "ops"; render(); const o = C.operacoes.find((x) => x.id === id); if (o) irParaRotina(o.rotina); }
+
+function vistaOps() {
+  const o = C.operacoes.find((x) => x.id === opAtual);
+  const sqls = o.sql.map((r) => C.sql.find((s) => s.origem === r));
+  const estado = o.implementado ? `<span class="chip ok">implementada</span>` : `<span class="chip falta">sem código</span>`;
+  return `<div class="lista-ops">${C.operacoes.map((x) => `<button class="op" aria-pressed="${x.id === opAtual}" data-sel="${esc(x.id)}">${esc(x.gatilho)}</button>`).join("")}</div>
+  <div class="trilha">
+    <div class="passo"><span class="rotulo">gatilho</span><div><b class="mono">${esc(o.id)}</b> ${estado}</div></div>
+    <div class="passo"><span class="rotulo">rotina</span><div>${refRotina(o.rotina)}</div></div>
+    <div class="passo"><span class="rotulo">chama</span><div>${o.chama.length ? o.chama.map(refRotina).join("<br>") : "<span class='mono'>—</span>"}</div></div>
+    <div class="passo"><span class="rotulo">SQL</span><div class="pilha" style="gap:8px">${sqls.length ? sqls.map((s) => `<div class="pilha" style="gap:4px"><div>${ref(s.origem)} <span class="chip neutro">${esc(s.operacao)}</span>${s.dinamico ? ' <span class="chip falta">dinâmico</span>' : ""}</div><div class="sqltexto">${esc(s.texto)}</div></div>`).join("") : "<span class='mono'>nenhum SQL alcançado</span>"}</div></div>
+    <div class="passo"><span class="rotulo">tabelas</span><div class="mono">${o.tabelas.join(", ") || "—"}</div></div>
+    <div class="passo"><span class="rotulo">entradas</span><div class="mono">${o.parametros.map((p) => ":" + p).join("  ") || "—"}</div></div>
+  </div>`;
+}
+function vistaTelas() {
+  return C.formularios.map((f) => `<div class="pilha" style="gap:6px"><h3>${esc(f.nome)} <span class="mono" style="font-weight:400;color:var(--tinta-2)">${esc(f.classe)} · ${ref(f.arquivo + ":" + f.nome)}</span></h3>
+  <div class="tabela"><table><thead><tr><th>componente</th><th>classe</th><th>o que importa</th></tr></thead><tbody>
+  ${f.componentes.map((c) => `<tr><td class="mono">${esc(c.nome)}</td><td class="mono">${esc(c.classe)}</td><td class="mono">${esc(Object.entries(c.propriedades || {}).map(([k, v]) => `${k}=${typeof v === "object" ? JSON.stringify(v) : v}`).join("; ") || "—")}</td></tr>`).join("")}
+  </tbody></table></div></div>`).join("");
+}
+function vistaSql() {
+  const tab = Object.entries(C.tabelas).map(([t, onde]) => `<tr><td class="mono"><b>${esc(t)}</b></td><td>${onde.map(ref).join("<br>")}</td></tr>`).join("");
+  return `<div class="tabela"><table><thead><tr><th>tabela</th><th>onde aparece</th></tr></thead><tbody>${tab}</tbody></table></div>` +
+    C.sql.map((s) => `<div class="pilha" style="gap:4px"><div>${ref(s.origem)} <span class="chip neutro">${esc(s.operacao)}</span>${s.dinamico ? ' <span class="chip falta">dinâmico</span>' : ""}</div><div class="sqltexto">${esc(s.texto)}</div></div>`).join("");
+}
+function vistaPend() {
+  return `<p>O que a leitura não consegue afirmar. Cada item é uma pergunta para quem conhece o sistema.</p>` +
+    C.pendencias.map((p) => `<div class="pend"><span class="mono"><b>${esc(p.tipo)}</b></span><span>${ref(p.onde)}</span><span>${esc(p.detalhe)}</span></div>`).join("");
+}
+const ORIGINAL = JSON.stringify(C, null, 2);
+function vistaVerificar() {
+  return `<p>Edite qualquer valor do contrato (por exemplo, troque <code>"implementado": false</code> por <code>true</code>) e clique em Verificar. Esta é uma simulação no navegador do mesmo critério do comando <code>verificar</code>: comparar o contrato, seção por seção, com o que o código-fonte produz.</p>
+  <textarea id="edicao" spellcheck="false" aria-label="Contrato em JSON">${esc(ORIGINAL)}</textarea>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="acao" id="btn-verificar">Verificar</button><button class="acao sec" id="btn-restaurar">Restaurar</button></div>
+  <div id="veredito" aria-live="polite"></div>`;
+}
+function verificar() {
+  const v = $("#veredito");
+  let editado;
+  try { editado = JSON.parse($("#edicao").value); } catch (e) { v.className = "veredito ruim"; v.textContent = "O contrato não é um JSON válido: " + e.message; return; }
+  const chaves = [...new Set([...Object.keys(C), ...Object.keys(editado)])].sort();
+  const diverge = chaves.filter((k) => JSON.stringify(C[k]) !== JSON.stringify(editado[k]));
+  v.className = "veredito " + (diverge.length ? "ruim" : "ok");
+  v.innerHTML = diverge.length ? diverge.map((k) => `seção '${esc(k)}' diverge do fonte`).join("<br>") : "contrato confere com o fonte";
+}
+function render() {
+  document.querySelectorAll("#abas-contrato .aba").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.aba === abaAtual)));
+  const vistas = { ops: vistaOps, telas: vistaTelas, sql: vistaSql, pend: vistaPend, verificar: vistaVerificar };
+  $("#conteudo").innerHTML = vistas[abaAtual]();
+  document.querySelectorAll("#janela [data-op]").forEach((b) => b.classList.toggle("ativo", abaAtual === "ops" && b.dataset.op === opAtual));
+  if (abaAtual === "verificar") {
+    $("#btn-verificar").addEventListener("click", verificar);
+    $("#btn-restaurar").addEventListener("click", () => { $("#edicao").value = ORIGINAL; $("#veredito").className = ""; $("#veredito").textContent = ""; });
+  }
+}
+$("#conteudo").addEventListener("click", (e) => { const b = e.target.closest("[data-sel]"); if (b) selecionarOp(b.dataset.sel); });
+render();
+irParaRotina(C.operacoes.find((x) => x.id === opAtual).rotina);
+</script>
