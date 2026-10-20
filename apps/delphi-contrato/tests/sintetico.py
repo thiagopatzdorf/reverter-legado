@@ -95,3 +95,20 @@ def pe(rcdata: dict[str, bytes], codigo: bytes) -> bytes:
                                                   (b".rsrc", rva_rsrc, _alinhar(rsrc, 0x200), 0x200 + len(texto_bruto))]):
         struct.pack_into("<8sIIII", cab, sec + 40 * k, nome, len(bruto), rva, len(bruto), ptr)
     return bytes(cab) + texto_bruto + _alinhar(rsrc, 0x200)
+
+
+CADASTRO = Path(__file__).resolve().parent / "fixtures" / "cadastro"
+METODOS_CADASTRO = ("TFrmClientes", "TDmDados", "FormShow", "BtnSalvarClick")
+
+
+def cadastro_exe(metodos=METODOS_CADASTRO) -> bytes:
+    """O exemplo `cadastro` "compilado": as duas telas como RCDATA, a tabela de métodos publicados
+    com `metodos` e dois SQL soltos no código (UTF-16 e ANSI). Os testes e o exemplo da página do
+    navegador usam este mesmo executável, então provam a mesma coisa."""
+    rcdata = {classe: tpf0(dfm.ler((CADASTRO / arquivo).read_bytes()))
+              for classe, arquivo in (("TFRMCLIENTES", "UClientes.dfm"), ("TDMDADOS", "UDados.dfm"))}
+    rcdata["PACKAGEINFO"] = b"\x00\x01nao e formulario"
+    codigo = b"\x90" * 16 + b"".join(bytes([len(m)]) + m.encode() for m in metodos) + b"\x00" * 8
+    codigo += "INSERT INTO CLIENTES (CODIGO, NOME, CPF) VALUES (:CODIGO, :NOME, :CPF)".encode("utf-16-le") + b"\x00\x00"
+    codigo += b"\x00SELECT MAX(CODIGO) AS ULTIMO FROM \x00curto\x00"
+    return pe(rcdata, codigo)

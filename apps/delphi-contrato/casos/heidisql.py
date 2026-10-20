@@ -1,10 +1,10 @@
 """Caso real: HeidiSQL 12.21 (Delphi, GPL-2.0) do executável oficial até a web.
 
-Gera os dados da página /caso-delphi da Genesis, sem número digitado à mão:
+Gera os dados do caso Delphi de rea.genesisinnovation.io, sem número digitado à mão:
 
     python3 apps/delphi-contrato/casos/heidisql.py --zip <HeidiSQL_12.21_64_Portable.zip> \\
         --dpr <checkout do HeidiSQL em effb854>/packages/Delphi12.3/heidisql.dpr \\
-        --saida apps/genesis-site/fonte/caso-delphi
+        --saida apps/genesis-site/fonte/rea/delphi
 
 O zip é o da release oficial (URL abaixo); o .exe é lido de dentro dele como bytes,
 nunca extraído para disco nem executado. O fonte é o commit da master marcado

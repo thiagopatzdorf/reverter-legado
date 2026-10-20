@@ -315,17 +315,11 @@ def test_pagina_do_prototipo_ficou_velha_em_relacao_ao_contrato():
 # ------------------------------------------------------------------ executável
 
 
-def _exe(tmp_path, metodos=("TFrmClientes", "TDmDados", "FormShow", "BtnSalvarClick")):
-    from sintetico import pe
+def _exe(tmp_path, metodos=None):
+    from sintetico import METODOS_CADASTRO, cadastro_exe
 
-    rcdata = {classe: _encode(dfm.ler((FIXTURE / arquivo).read_bytes()))
-              for classe, arquivo in (("TFRMCLIENTES", "UClientes.dfm"), ("TDMDADOS", "UDados.dfm"))}
-    rcdata["PACKAGEINFO"] = b"\x00\x01nao e formulario"
-    codigo = b"\x90" * 16 + b"".join(bytes([len(m)]) + m.encode() for m in metodos) + b"\x00" * 8
-    codigo += "INSERT INTO CLIENTES (CODIGO, NOME, CPF) VALUES (:CODIGO, :NOME, :CPF)".encode("utf-16-le") + b"\x00\x00"
-    codigo += b"\x00SELECT MAX(CODIGO) AS ULTIMO FROM \x00curto\x00"
     caminho = tmp_path / "Cadastro.exe"
-    caminho.write_bytes(pe(rcdata, codigo))
+    caminho.write_bytes(cadastro_exe(metodos or METODOS_CADASTRO))
     return caminho
 
 

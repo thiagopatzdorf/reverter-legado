@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Delphi para contrato</title>
+<meta name="description" content="Lê um sistema Delphi (.exe, .dll, .bpl, .dfm ou o .zip do projeto) e escreve o contrato que o sistema novo tem de honrar. Roda inteiro no seu navegador: o arquivo não sai do computador.">
+<link rel="stylesheet" href="tela/tela.css">
+<link rel="stylesheet" href="estilo.css">
+<script type="module" src="app.mjs"></script>
+</head>
+<body data-estado="carregando">
+<main>
+  <header class="topo">
+    <p class="selo">Delphi → contrato</p>
+    <h1>O contrato do seu sistema Delphi, lido aqui no navegador</h1>
+    <p>Telas, componentes, eventos, SQL e o que falta, num JSON que o sistema novo tem de honrar.
+      Funciona no Windows, no Mac e no Linux, sem instalar nada.</p>
+    <p class="privado" id="privacidade"><strong>Seu arquivo não sai deste computador.</strong>
+      Ele é lido pelo próprio navegador, com o mesmo programa em Python da linha de comando rodando
+      em WebAssembly. A página não tem servidor que receba arquivo: depois de carregada, ela só busca
+      os próprios arquivos e nunca envia o conteúdo para lugar nenhum.</p>
+  </header>
+
+  <section id="entrada" aria-labelledby="t-entrada">
+    <h2 id="t-entrada">1. Escolha o sistema</h2>
+    <div id="soltar" class="soltar">
+      <p>Arraste aqui o <b>.exe</b>, <b>.dll</b> ou <b>.bpl</b>, o <b>.zip</b> do projeto ou os <b>.dfm</b>.</p>
+      <label for="arquivo" class="rotulo-arquivo">Arquivo do sistema Delphi</label>
+      <input id="arquivo" name="arquivo" type="file" multiple accept=".exe,.dll,.bpl,.ocx,.zip,.dfm,.pas,.dpr,.dpk" aria-describedby="dica">
+    </div>
+    <p id="dica" class="dica">Sem o fonte, o executável dá as telas, os eventos e o SQL dos componentes. Com o fonte (.zip com .dpr, .pas e .dfm), também cada clique ligado ao SQL que ele alcança.</p>
+    <div class="exemplos">
+      <button id="exemplo-zip" type="button" class="botao secundario">Testar com o exemplo: projeto Cadastro (.zip)</button>
+      <button id="exemplo-exe" type="button" class="botao secundario">Testar com o exemplo: Cadastro.exe</button>
+    </div>
+    <p id="motor-estado" class="estado" role="status" aria-live="polite">Carregando o motor (Python no navegador, cerca de 6 MB na primeira visita)…</p>
+  </section>
+
+  <section id="resultado" aria-labelledby="t-resultado" hidden>
+    <h2 id="t-resultado">2. O contrato</h2>
+    <p id="resumo-origem" class="dica"></p>
+    <dl id="resumo" class="numeros"></dl>
+    <div id="recorte" class="linha" hidden>
+      <label for="projeto">Ler</label>
+      <select id="projeto" name="projeto"></select>
+    </div>
+    <div class="linha">
+      <button id="baixar-json" type="button" class="botao">Baixar contrato.json</button>
+      <button id="baixar-md" type="button" class="botao secundario">Baixar relatório .md</button>
+    </div>
+    <p id="aviso-web" class="aviso" hidden></p>
+
+    <h3>Telas</h3>
+    <div class="linha">
+      <label for="tela">Tela</label>
+      <select id="tela" name="tela"></select>
+    </div>
+    <div id="palco" class="palco"></div>
+    <aside id="detalhe" class="detalhe" aria-live="polite">
+      <p>Clique num componente com contorno: aparece o evento, a rotina e a operação do contrato (tabelas e SQL que o clique alcança).</p>
+    </aside>
+
+    <h3>Pendências</h3>
+    <ul id="pendencias" class="pendencias"></ul>
+
+    <details>
+      <summary>Contrato em JSON (o arquivo inteiro)</summary>
+      <pre id="contrato-json" class="codigo" tabindex="0"></pre>
+    </details>
+  </section>
+
+  <section id="comparar" aria-labelledby="t-comparar">
+    <h2 id="t-comparar">3. Comparar executável × fonte</h2>
+    <p class="dica">As telas do .exe batem com as do fonte, componente por componente e evento por evento? É a prova de que dá para migrar só com o executável.</p>
+    <div class="campos">
+      <label for="comparar-exe">Executável (.exe, .dll, .bpl ou .zip com um .exe)</label>
+      <input id="comparar-exe" name="comparar-exe" type="file" accept=".exe,.dll,.bpl,.ocx,.zip">
+      <label for="comparar-fonte">Fonte (.zip do projeto, ou .dfm e .pas)</label>
+      <input id="comparar-fonte" name="comparar-fonte" type="file" multiple accept=".zip,.dfm,.pas,.dpr,.dpk">
+    </div>
+    <div class="linha">
+      <button id="comparar-botao" type="button" class="botao">Comparar</button>
+      <button id="comparar-exemplo" type="button" class="botao secundario">Comparar os dois exemplos</button>
+    </div>
+    <p id="comparar-veredito" class="estado" role="status" aria-live="polite"></p>
+    <pre id="comparacao-json" class="codigo" tabindex="0" hidden></pre>
+  </section>
+
+  <section id="agentes" aria-labelledby="t-agentes">
+    <h2 id="t-agentes">Para agentes de IA</h2>
+    <p>Um agente com navegador usa a página como uma pessoa: envie o arquivo em <code>#arquivo</code>
+      (ou clique num exemplo), espere <code>body[data-estado="feito"]</code> e leia o resultado em JSON
+      logo abaixo. O contrato inteiro fica em <code>#contrato-json</code> e a comparação em
+      <code>#comparacao-json</code>.</p>
+    <p id="webmcp-estado">Ferramentas WebMCP: verificando…</p>
+    <pre id="resultado-json" class="codigo" tabindex="0" aria-label="Resultado em JSON">{"estado":"carregando"}</pre>
+  </section>
+
+  <footer class="rodape">
+    <p>Mesmo arquivo, mesmo contrato: o JSON baixado aqui é byte a byte o de
+      <code>python3 -m delphi_contrato extrair</code>. O motor é o Pyodide (MPL-2.0), servido deste domínio.</p>
+  </footer>
+</main>
+</body>
+</html>

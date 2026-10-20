@@ -81,7 +81,7 @@ A versão do REA está em dois lugares (código e fita) e o teste
 `test_versao_do_rea_na_fita_diverge_da_do_codigo` reprova se divergirem. Atualizar o REA
 é um diff revisado nos dois, nunca `@latest`.
 
-## Caso real: HeidiSQL 12.21 (publicado em genesisinnovation.io/caso-delphi)
+## Caso real: HeidiSQL 12.21 (publicado em rea.genesisinnovation.io, aba Delphi; o antigo genesisinnovation.io/caso-delphi leva para lá)
 
 O executável oficial (`heidisql.exe`, 25 MB, release v12.21) e o fonte Delphi do commit de release
 (`effb854`, "Bump version for v12.21 release"; a tag `v12.21` aponta para o port em Lazarus):
@@ -120,7 +120,7 @@ A receita da imagem do REA (entradas com sha256, imagem e sessão por fila) est�
 `reverso/README.md`, com o servidor da sessão em `reverso/servidor.mjs`.
 
     python3 apps/delphi-contrato/casos/heidisql_rea.py [--exe heidisql.exe] \
-        --saida apps/genesis-site/fonte/caso-delphi/rea.json
+        --saida apps/genesis-site/fonte/rea/delphi/rea.json
 
 O caso real derrubou três suposições do leitor, cada uma virou teste: tipo procedural
 (`procedure(...); cdecl;`, `procedure of object`) não abre rotina; pasta de projeto real mistura
@@ -132,6 +132,63 @@ Comandos novos:
     python3 -m delphi_contrato extrair <projeto>.dpr -o contrato.json   # só as units do projeto
     python3 -m delphi_contrato comparar Sistema.exe <projeto>.dpr      # sai 1 se alguma tela divergir
     python3 -m delphi_contrato web Sistema.exe -o telas.json           # recusa se faltar algo do contrato
+
+## No navegador, sem instalar nada (`navegador/`)
+
+O mesmo pacote `delphi_contrato`, rodando no Pyodide 314.0.7 (Python 3.14 em WebAssembly), numa
+página estática: o usuário arrasta o `.exe`/`.dll`/`.bpl`, os `.dfm` ou o `.zip` do projeto e baixa o
+`contrato.json` e o relatório `.md`. O arquivo é lido na própria aba e não sai do computador.
+
+    python3 apps/delphi-contrato/navegador/montar.py <destino> [--prefixo /experimente/]
+    python3 apps/delphi-contrato/navegador/servir.py <destino>    # conferir local, com a CSP
+
+| medido (Chromium 141 headless, 2026-10-20) | resultado |
+|---|---|
+| contrato baixado × CLI, mesmo arquivo | sha256 igual: `cadastro.zip`, `Cadastro.exe` sintético, o `heidisql.exe` real de 25 MB e o zip portable oficial dele (30 MB, 34 binários: a página acha o único com tela Delphi) |
+| tamanho da pasta montada | 13,7 MB (Pyodide 13,5 MB; ~6,3 MB com gzip) |
+| carga do motor (cache frio, servidor local) | ~2,4 s |
+| extração | exemplo: 24–32 ms; `heidisql.exe`: 6,8 s (CPython: 5,6 s) |
+| rede depois da carga | só GET dos arquivos da própria pasta; 0 pedido externo, 0 pedido com corpo, 0 violação de CSP |
+
+O que entra na página e como ela diz o que equivale na CLI está em `navegador/ponte.py`. O Pyodide não
+vai para o Git: o `montar.py` baixa o pacote do npm uma vez, confere o sha256 de cada arquivo contra
+`navegador/pyodide.json` e guarda em `navegador/.cache/` (ou `$DELPHI_PYODIDE_CACHE`).
+`tests/test_navegador.py` abre a página num Chromium headless e compara o sha256 do contrato baixado
+com o da CLI.
+
+**Para quem embute** (o site serve a pasta montada como está, em qualquer caminho, porque todo endereço
+é relativo): a página é `index.html`, e o servidor precisa mandar a CSP do `manifesto.json` (o
+`montar.py` já escreve `_headers` no formato do Cloudflare). O mínimo é
+`script-src 'self' 'wasm-unsafe-eval'`, `worker-src 'self'` e `connect-src 'self'`. Sem
+`'wasm-unsafe-eval'` o WebAssembly não compila; isso não libera `eval` de JavaScript. Os `.mjs` têm
+de sair como `text/javascript` e o `.wasm` como `application/wasm`.
+
+**Para agentes de IA**: a página funciona por cliques (`#arquivo`, botões com rótulo), marca
+`body[data-estado]` (`carregando`, `pronto`, `extraindo`, `feito`, `erro`) e deixa o resultado em JSON
+em `#resultado-json` (contrato inteiro em `#contrato-json`). Quando o navegador tem WebMCP
+(`document.modelContext`, ou o antigo `navigator.modelContext`), registra `extrair_contrato` e
+`comparar`. Medido: o Chromium 141 headless daqui não tem a API, nem com `--enable-features=WebMCP`;
+o teste usa uma API simulada para provar que as duas ferramentas registram e devolvem o mesmo sha256.
+Pela documentação do Chrome (não medido aqui), o WebMCP existe só no Chrome com a flag
+`chrome://flags/#enable-webmcp-testing` ou em origin trial (Chrome 149 a 156), e Firefox e Safari
+não o têm. Onde não existe, a página segue igual e `window.delphiContrato` dá a mesma API em JS.
+
+### Perguntas do professor
+
+**Roda no Mac?** No navegador, sim: Safari, Chrome ou Firefox recentes, sem instalar nada (a página
+usa WebAssembly e módulo em Web Worker; medido no Chromium, não num Mac). A linha de comando
+também, com Python ≥ 3.12. Atenção: o `python3` que vem com as Command Line Tools da Apple é o 3.9.6,
+até no macOS Tahoe com Xcode 26 ([fórum da Apple](https://developer.apple.com/forums/thread/838682)), e
+não serve. Instale o Python 3.12 ou mais novo pelo instalador de python.org (ou `brew install
+python@3.12`) e rode `python3 -m delphi_contrato extrair ...` de dentro de `apps/delphi-contrato`.
+
+**Dá para baixar um .exe para testar?** Não é preciso: a página é o "programa para baixar" que serve
+para Windows, Mac e Linux de uma vez. Para quem precisa rodar sem internet, a opção mais barata medida
+é o pacote como `zipapp` (`python3 -m zipapp`): um arquivo `.pyz` de 89 KB que roda com qualquer
+Python ≥ 3.12 e dá o mesmo sha256 do contrato. No Windows sem Python instalado, o "embeddable package"
+do python.org (3.12.10, 11,1 MB, só descompactar) mais o `.pyz` e um `.bat` resolvem, e dá para montar
+isso daqui, sem máquina Windows. Executável nativo (PyInstaller e similares) não foi feito: precisa
+de máquina Windows e Mac para compilar e assinar, e não temos nenhuma das duas para build.
 
 ## Limites conhecidos (medidos, não supostos)
 

@@ -5,7 +5,7 @@ do handler o executável não entrega. Aqui o REA (Ghidra) decompila cinco handl
 por um texto que só aquele handler usa no fonte, e o resultado é medido contra o fonte:
 
     python3 apps/delphi-contrato/casos/heidisql_rea.py \\
-        [--exe <heidisql.exe>] --saida apps/genesis-site/fonte/caso-delphi/rea.json
+        [--exe <heidisql.exe>] --saida apps/genesis-site/fonte/rea/delphi/rea.json
 
 Sem --exe, a conferência da tabela de métodos vem da evidência gravada; com --exe ela é
 refeita lendo o binário (só bytes, nada é executado). O veredito de cada handler sai das
